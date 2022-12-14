@@ -3,7 +3,7 @@
 *	short xsp_vsync(short n);
 *
 *==========================================================================
-
+xsp_vsync:
 _xsp_vsync:
 
 L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -39,7 +39,7 @@ xsp_vsync_rts:
 *	void xsp_objdat_set(void *sp_ref);
 *
 *==========================================================================
-
+xsp_objdat_set:
 _xsp_objdat_set:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -57,7 +57,7 @@ _xsp_objdat_set:
 *	void xsp_pcgdat_set(void *pcg_dat, char *pcg_alt, short alt_size);
 *
 *==========================================================================
-
+xsp_pcgdat_set:
 _xsp_pcgdat_set:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -106,7 +106,7 @@ _xsp_pcgdat_set:
 *	void xsp_pcgmask_on(short start_no, short end_no);
 *
 *==========================================================================
-
+xdp_pcgmask_on:
 _xsp_pcgmask_on:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -156,7 +156,7 @@ xsp_mask_on_ERR:
 *	void xsp_pcgmask_off(short start_no, short end_no);
 *
 *==========================================================================
-
+xsp_pcgmask_off:
 _xsp_pcgmask_off:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -206,7 +206,7 @@ xsp_mask_off_ERR:
 *	void xsp_mode(short mode_no);
 *
 *==========================================================================
-
+xsp_mode:
 _xsp_mode:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -235,7 +235,7 @@ _xsp_mode:
 *	void xsp_vertical(short flag);
 *
 *==========================================================================
-
+xsp_vertical:
 _xsp_vertical:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -252,7 +252,7 @@ _xsp_vertical:
 *	void xsp_on();
 *
 *==========================================================================
-
+xsp_on:
 _xsp_on:
 
 ;L_A7ID	EQU	4+15*4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -331,7 +331,7 @@ xsp_on_rts:
 *	void xsp_off();
 *
 *==========================================================================
-
+xsp_off:
 _xsp_off:
 
 ;L_A7ID	EQU	4+15*4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -414,7 +414,7 @@ xsp_off_rts:
 *	void xsp_vsyncint_on(void *proc);
 *
 *==========================================================================
-
+xsp_vsyncint_on:
 _xsp_vsyncint_on:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -431,7 +431,7 @@ _xsp_vsyncint_on:
 *	void xsp_vsyncint_off();
 *
 *==========================================================================
-
+xsp_vsyncint_off:
 _xsp_vsyncint_off:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -448,7 +448,7 @@ _xsp_vsyncint_off:
 *	void xsp_hsyncint_on(void *time_chart);
 *
 *==========================================================================
-
+xsp_hsyncint_on:
 _xsp_hsyncint_on:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -465,7 +465,7 @@ _xsp_hsyncint_on:
 *	void xsp_hsyncint_off();
 *
 *==========================================================================
-
+xsp_hsyncint_off:
 _xsp_hsyncint_off:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -481,7 +481,7 @@ _xsp_hsyncint_off:
 *	void xsp_auto_adjust_divy(short flag);
 *
 *==========================================================================
-
+xsp_auto_adjust_divy:
 _xsp_auto_adjust_divy:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -496,7 +496,7 @@ _xsp_auto_adjust_divy:
 *	short xsp_divy_get(short i);
 *
 *==========================================================================
-
+xsp_divy_get:
 _xsp_divy_get:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -550,6 +550,7 @@ _xsp_min_divh_set:
 *	void xsp_raster_ofs_for31khz_set(short ofs);
 *
 *==========================================================================
+xsp_raster_ofs_for31khz_set:
 _xsp_raster_ofs_for31khz_set:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -574,6 +575,7 @@ _xsp_raster_ofs_for31khz_set:
 *	short xsp_raster_ofs_for31khz_get();
 *
 *==========================================================================
+xsp_raster_ofs_for31khz_get:
 _xsp_raster_ofs_for31khz_get:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -589,6 +591,7 @@ _xsp_raster_ofs_for31khz_get:
 *	void xsp_raster_ofs_for15khz_set(short ofs);
 *
 *==========================================================================
+xsp_raster_ofs_for15khz_set:
 _xsp_raster_ofs_for15khz_set:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
@@ -612,6 +615,7 @@ _xsp_raster_ofs_for15khz_set:
 *	short xsp_raster_ofs_for15khz_get();
 *
 *==========================================================================
+xsp_raster_ofs_for15khz_get:
 _xsp_raster_ofs_for15khz_get:
 
 ;L_A7ID	EQU	4			;   スタック上 return先アドレス  [ 4 byte ]
