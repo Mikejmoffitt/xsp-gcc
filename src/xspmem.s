@@ -1,4 +1,4 @@
-	SECTION	TEXT
+	SECTION	.data
 	ALIGN	2
 
 vektor_118_bak:	dc.l	0			; 変更前の V-disp ベクタ
@@ -75,7 +75,7 @@ raster_ofs_for15khz:	dc.w	16*1+0		; スプライト転送ラスタの調整値�
 
 *==============================================================
 
-	SECTION	BSS
+	SECTION	.bss
 	ALIGN	2
 
 

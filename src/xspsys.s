@@ -4,37 +4,69 @@
 	include	doscall.mac
 	include	iocscall.mac
 
-;	.globl	_xsp_vsync
-;	.globl	_xsp_objdat_set
-;	.globl	_xsp_pcgdat_set
-;	.globl	_xsp_pcgmask_on
-;	.globl	_xsp_pcgmask_off
-;	.globl	_xsp_mode
-;	.globl	_xsp_vertical
+	global	_xsp_vsync
+	global	_xsp_objdat_set
+	global	_xsp_pcgdat_set
+	global	_xsp_pcgmask_on
+	global	_xsp_pcgmask_off
+	global	_xsp_mode
+	global	_xsp_vertical
 
-;	.globl	_xsp_on
-;	.globl	_xsp_off
+	global	_xsp_on
+	global	_xsp_off
 
-;	.globl	_xsp_set
-;	.globl	_xsp_set_st
-;	.globl	_xobj_set
-;	.globl	_xobj_set_st
-;	.globl	_xsp_out
+	global	_xsp_set
+	global	_xsp_set_st
+	global	_xobj_set
+	global	_xobj_set_st
+	global	_xsp_out
 
-;	.globl	_xsp_vsyncint_on
-;	.globl	_xsp_vsyncint_off
-;	.globl	_xsp_hsyncint_on
-;	.globl	_xsp_hsyncint_off
+	global	_xsp_vsyncint_on
+	global	_xsp_vsyncint_off
+	global	_xsp_hsyncint_on
+	global	_xsp_hsyncint_off
 
-;	.globl	_xsp_auto_adjust_divy
-;	.globl	_xsp_min_divh_set
+	global	_xsp_auto_adjust_divy
+	global	_xsp_min_divh_set
 
-;	.globl	_xsp_divy_get
+	global	_xsp_divy_get
 
-;	.globl	_xsp_raster_ofs_for31khz_set
-;	.globl	_xsp_raster_ofs_for31khz_get
-;	.globl	_xsp_raster_ofs_for15khz_set
-;	.globl	_xsp_raster_ofs_for15khz_get
+	global	_xsp_raster_ofs_for31khz_set
+	global	_xsp_raster_ofs_for31khz_get
+	global	_xsp_raster_ofs_for15khz_set
+	global	_xsp_raster_ofs_for15khz_get
+
+	global	xsp_vsync
+	global	xsp_objdat_set
+	global	xsp_pcgdat_set
+	global	xsp_pcgmask_on
+	global	xsp_pcgmask_off
+	global	xsp_mode
+	global	xsp_vertical
+
+	global	xsp_on
+	global	xsp_off
+
+	global	xsp_set
+	global	xsp_set_st
+	global	xobj_set
+	global	xobj_set_st
+	global	xsp_out
+
+	global	xsp_vsyncint_on
+	global	xsp_vsyncint_off
+	global	xsp_hsyncint_on
+	global	xsp_hsyncint_off
+
+	global	xsp_auto_adjust_divy
+	global	xsp_min_divh_set
+
+	global	xsp_divy_get
+
+	global	xsp_raster_ofs_for31khz_set
+	global	xsp_raster_ofs_for31khz_get
+	global	xsp_raster_ofs_for15khz_set
+	global	xsp_raster_ofs_for15khz_get
 
 
 
@@ -154,7 +186,7 @@ STRUCT_SIZE	EQU	360
 *	関数群のインクルード
 *
 *==========================================================================
-	SECTION	CODE
+	SECTION	.text
 	ALIGN	2
 
 ;	include	XSPset.s
