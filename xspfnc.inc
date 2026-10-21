@@ -4,7 +4,7 @@
 //
 // ========================================================================
 
-_xsp_vsync:
+xsp_vsync:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -40,7 +40,7 @@ xsp_vsync_rts:
 //
 // ========================================================================
 
-_xsp_vsync2:
+xsp_vsync2:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -75,7 +75,7 @@ xsp_vsync2_rts:
 //
 // ========================================================================
 
-_xsp_objdat_set:
+xsp_objdat_set:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -93,7 +93,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 //
 // ========================================================================
 
-_xsp_pcgdat_set:
+xsp_pcgdat_set:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -106,7 +106,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 	clr.w	vsync_count
 	movem.l	d0-d2/a0-a2,-(sp)	//  レジスタ退避
 	move.l	#3,-(sp)		//  引数を PUSH
-	bsr	_xsp_vsync		//  3 vsync WAIT
+	bsr	xsp_vsync		//  3 vsync WAIT
 	lea	4(sp),sp		//  スタック補正
 	movem.l	(sp)+,d0-d2/a0-a2	//  レジスタ復活
 
@@ -142,7 +142,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 //
 // ========================================================================
 
-_xsp_pcgmask_on:
+xsp_pcgmask_on:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -192,7 +192,7 @@ xsp_mask_on_ERR:
 //
 // ========================================================================
 
-_xsp_pcgmask_off:
+xsp_pcgmask_off:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -242,7 +242,7 @@ xsp_mask_off_ERR:
 //
 // ========================================================================
 
-_xsp_mode:
+xsp_mode:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -271,7 +271,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 //
 // ========================================================================
 
-_xsp_vertical:
+xsp_vertical:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -288,7 +288,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 //
 // ========================================================================
 
-_xsp_on:
+xsp_on:
 
 A7ID	=	4+15*4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 15*4 byte ]
@@ -367,7 +367,7 @@ xsp_on_rts:
 //
 // ========================================================================
 
-_xsp_off:
+xsp_off:
 
 A7ID	=	4+15*4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 15*4 byte ]
@@ -450,7 +450,7 @@ xsp_off_rts:
 //
 // ========================================================================
 
-_xsp_vsyncint_on:
+xsp_vsyncint_on:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -467,7 +467,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 //
 // ========================================================================
 
-_xsp_vsyncint_off:
+xsp_vsyncint_off:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -484,7 +484,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 //
 // ========================================================================
 
-_xsp_hsyncint_on:
+xsp_hsyncint_on:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -501,7 +501,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 //
 // ========================================================================
 
-_xsp_hsyncint_off:
+xsp_hsyncint_off:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -518,7 +518,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 //
 // ========================================================================
 
-_xsp_auto_adjust_divy:
+xsp_auto_adjust_divy:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -535,7 +535,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 //
 // ========================================================================
 
-_xsp_divy_get:
+xsp_divy_get:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -562,7 +562,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 // 	void xsp_min_divh_set(short h);
 //
 // ========================================================================
-_xsp_min_divh_set:
+xsp_min_divh_set:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -592,7 +592,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 // 	void xsp_raster_ofs_for31khz_set(short ofs);
 //
 // ========================================================================
-_xsp_raster_ofs_for31khz_set:
+xsp_raster_ofs_for31khz_set:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -618,7 +618,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 // 	short xsp_raster_ofs_for31khz_get();
 //
 // ========================================================================
-_xsp_raster_ofs_for31khz_get:
+xsp_raster_ofs_for31khz_get:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -635,7 +635,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 // 	void xsp_raster_ofs_for15khz_set(short ofs);
 //
 // ========================================================================
-_xsp_raster_ofs_for15khz_set:
+xsp_raster_ofs_for15khz_set:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -660,7 +660,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 // 	short xsp_raster_ofs_for15khz_get();
 //
 // ========================================================================
-_xsp_raster_ofs_for15khz_get:
+xsp_raster_ofs_for15khz_get:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -677,7 +677,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 // 	void xsp_vsync_interval_set(short interval);
 //
 // ========================================================================
-_xsp_vsync_interval_set:
+xsp_vsync_interval_set:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]
@@ -697,7 +697,7 @@ A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 // 	short xsp_vsync_interval_get(void);
 //
 // ========================================================================
-_xsp_vsync_interval_get:
+xsp_vsync_interval_get:
 
 A7ID	=	4			//    スタック上 return先アドレス  [ 4 byte ]
 					//  + 退避レジスタの全バイト数     [ 0 byte ]

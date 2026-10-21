@@ -5,46 +5,46 @@
 #include "doscall.mac"
 #include "iocscall.mac"
 
-	.global	_xsp_vsync
-	.global	_xsp_vsync2
-	.global	_xsp_objdat_set
-	.global	_xsp_pcgdat_set
-	.global	_xsp_pcgmask_on
-	.global	_xsp_pcgmask_off
-	.global	_xsp_mode
-	.global	_xsp_vertical
+	.global	xsp_vsync
+	.global	xsp_vsync2
+	.global	xsp_objdat_set
+	.global	xsp_pcgdat_set
+	.global	xsp_pcgmask_on
+	.global	xsp_pcgmask_off
+	.global	xsp_mode
+	.global	xsp_vertical
 
-	.global	_xsp_on
-	.global	_xsp_off
+	.global	xsp_on
+	.global	xsp_off
 
-	.global	_xsp_set
-	.global	_xsp_set_st
-	.global	_xobj_set
-	.global	_xobj_set_st
-	.global	_xsp_set_asm
-	.global	_xsp_set_st_asm
-	.global	_xobj_set_asm
-	.global	_xobj_set_st_asm
-	.global	_xsp_out
-	.global	_xsp_out2
+	.global	xsp_set
+	.global	xsp_set_st
+	.global	xobj_set
+	.global	xobj_set_st
+	.global	xsp_set_asm
+	.global	xsp_set_st_asm
+	.global	xobj_set_asm
+	.global	xobj_set_st_asm
+	.global	xsp_out
+	.global	xsp_out2
 
-	.global	_xsp_vsyncint_on
-	.global	_xsp_vsyncint_off
-	.global	_xsp_hsyncint_on
-	.global	_xsp_hsyncint_off
+	.global	xsp_vsyncint_on
+	.global	xsp_vsyncint_off
+	.global	xsp_hsyncint_on
+	.global	xsp_hsyncint_off
 
-	.global	_xsp_auto_adjust_divy
-	.global	_xsp_min_divh_set
+	.global	xsp_auto_adjust_divy
+	.global	xsp_min_divh_set
 
-	.global	_xsp_divy_get
+	.global	xsp_divy_get
 
-	.global	_xsp_raster_ofs_for31khz_set
-	.global	_xsp_raster_ofs_for31khz_get
-	.global	_xsp_raster_ofs_for15khz_set
-	.global	_xsp_raster_ofs_for15khz_get
+	.global	xsp_raster_ofs_for31khz_set
+	.global	xsp_raster_ofs_for31khz_get
+	.global	xsp_raster_ofs_for15khz_set
+	.global	xsp_raster_ofs_for15khz_get
 
-	.global	_xsp_vsync_interval_set
-	.global	_xsp_vsync_interval_get
+	.global	xsp_vsync_interval_set
+	.global	xsp_vsync_interval_get
 
 
 // ========================================================================
