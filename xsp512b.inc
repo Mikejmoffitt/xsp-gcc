@@ -1,6 +1,6 @@
 // ==========================================================================
 //
-// 	512 –‡ƒ‚[ƒhEƒ\[ƒeƒBƒ“ƒOƒ‹[ƒ`ƒ“i—Dæ“x•ÛŒì‹@”\•t‚«j
+// 	512 æžšãƒ¢ãƒ¼ãƒ‰ãƒ»ã‚½ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ãƒ«ãƒ¼ãƒãƒ³ï¼ˆå„ªå…ˆåº¦ä¿è­·æ©Ÿèƒ½ä»˜ãï¼‰
 //
 // ==========================================================================
 
@@ -8,7 +8,7 @@
 
 // ==========================================================================
 //
-// 	ƒ}ƒNƒ’è‹`
+// 	ãƒžã‚¯ãƒ­å®šç¾©
 //
 // ==========================================================================
 
@@ -17,23 +17,23 @@
 .macro	SORT_512b_An	An
 //		.local	end_mark
 
-	// =======[ ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@‚É“o˜^ ]
-		tst.w	(\An)			// [12]	ƒoƒbƒtƒ@ƒ`ƒFƒbƒN
-		bmi.b	1f  // end_mark		// [8,10]	•‰‚È‚çI“_‚È‚Ì‚Å”ò‚Î‚·
-		move.l	d0,(\An)+		// [12]	x,y “]‘—
-		move.l	(a0)+,(\An)+		// [20]	cd,pr “]‘—
+	// =======[ ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡ã«ç™»éŒ² ]
+		tst.w	(\An)			// [12]	ãƒãƒƒãƒ•ã‚¡ãƒã‚§ãƒƒã‚¯
+		bmi.b	1f  // end_mark		// [8,10]	è² ãªã‚‰çµ‚ç‚¹ãªã®ã§é£›ã°ã™
+		move.l	d0,(\An)+		// [12]	x,y è»¢é€
+		move.l	(a0)+,(\An)+		// [20]	cd,pr è»¢é€
 		dbra	d7,SORT_512b_LOOP
 0:
-		movea.l	CHAIN_OFS-4(a0),a0	//  ŽŸ‚Ì PR ½ƒAƒhƒŒƒX
-		move.w	CHAIN_OFS(a0),d7	//  ˜A½”i‚»‚Ì‚Ü‚Ü dbcc ƒJƒEƒ“ƒ^‚Æ‚µ‚ÄŽg‚¦‚éj
-		bpl	SORT_512b_LOOP		//  ˜A½” >= 0 ‚È‚ç‘±s
-		bra	SORT_512b_PRchange	//  PR •ÏX
+		movea.l	CHAIN_OFS-4(a0),a0	//  æ¬¡ã® PR éŽ–ã‚¢ãƒ‰ãƒ¬ã‚¹
+		move.w	CHAIN_OFS(a0),d7	//  é€£éŽ–æ•°ï¼ˆãã®ã¾ã¾ dbcc ã‚«ã‚¦ãƒ³ã‚¿ã¨ã—ã¦ä½¿ãˆã‚‹ï¼‰
+		bpl	SORT_512b_LOOP		//  é€£éŽ–æ•° >= 0 ãªã‚‰ç¶šè¡Œ
+		bra	SORT_512b_PRchange	//  PR å¤‰æ›´
 
-	// -------[ I“_‚É’B‚µ‚½ ]
+	// -------[ çµ‚ç‚¹ã«é”ã—ãŸ ]
 1:  // end_mark:
-		addq.w	#4,a0			//  ƒ|ƒCƒ“ƒ^•â³icd,pr‚ð”ò‚Î‚·j
+		addq.w	#4,a0			//  ãƒã‚¤ãƒ³ã‚¿è£œæ­£ï¼ˆcd,prã‚’é£›ã°ã™ï¼‰
 		dbra	d7,SORT_512b_LOOP
-		bra.b	@B
+		bra.b	0b
 
 		.endm
 
@@ -42,49 +42,49 @@
 .macro	SORT_512b_Dn	Dn
 //		.local	end_mark
 
-	// =======[ ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@‚É“o˜^ ]
+	// =======[ ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡ã«ç™»éŒ² ]
 		movea.l	\Dn,a2			// [ 4]	a2.l = Dn.l
-		tst.w	(a2)			// [12]	ƒoƒbƒtƒ@ƒ`ƒFƒbƒN
-		bmi.b	1f  // end_mark		// [8,10]	•‰‚È‚çI“_‚È‚Ì‚Å”ò‚Î‚·
-		move.l	d0,(a2)+		// [12]	x,y “]‘—
-		move.l	(a0)+,(a2)+		// [20]	cd,pr “]‘—
-		move.l	a2,\Dn			// [ 4]	Dn.l ‚É–ß‚·
+		tst.w	(a2)			// [12]	ãƒãƒƒãƒ•ã‚¡ãƒã‚§ãƒƒã‚¯
+		bmi.b	1f  // end_mark		// [8,10]	è² ãªã‚‰çµ‚ç‚¹ãªã®ã§é£›ã°ã™
+		move.l	d0,(a2)+		// [12]	x,y è»¢é€
+		move.l	(a0)+,(a2)+		// [20]	cd,pr è»¢é€
+		move.l	a2,\Dn			// [ 4]	Dn.l ã«æˆ»ã™
 		dbra	d7,SORT_512b_LOOP
 0:
-		movea.l	CHAIN_OFS-4(a0),a0	//  ŽŸ‚Ì PR ½ƒAƒhƒŒƒX
-		move.w	CHAIN_OFS(a0),d7	//  ˜A½”i‚»‚Ì‚Ü‚Ü dbcc ƒJƒEƒ“ƒ^‚Æ‚µ‚ÄŽg‚¦‚éj
-		bpl	SORT_512b_LOOP		//  ˜A½” >= 0 ‚È‚ç‘±s
-		bra	SORT_512b_PRchange	//  PR •ÏX
+		movea.l	CHAIN_OFS-4(a0),a0	//  æ¬¡ã® PR éŽ–ã‚¢ãƒ‰ãƒ¬ã‚¹
+		move.w	CHAIN_OFS(a0),d7	//  é€£éŽ–æ•°ï¼ˆãã®ã¾ã¾ dbcc ã‚«ã‚¦ãƒ³ã‚¿ã¨ã—ã¦ä½¿ãˆã‚‹ï¼‰
+		bpl	SORT_512b_LOOP		//  é€£éŽ–æ•° >= 0 ãªã‚‰ç¶šè¡Œ
+		bra	SORT_512b_PRchange	//  PR å¤‰æ›´
 
-	// -------[ I“_‚É’B‚µ‚½ ]
+	// -------[ çµ‚ç‚¹ã«é”ã—ãŸ ]
 1:  //end_mark:
-		addq.w	#4,a0			//  ƒ|ƒCƒ“ƒ^•â³icd,pr‚ð”ò‚Î‚·j
+		addq.w	#4,a0			//  ãƒã‚¤ãƒ³ã‚¿è£œæ­£ï¼ˆcd,prã‚’é£›ã°ã™ï¼‰
 		dbra	d7,SORT_512b_LOOP
-		bra.b	@B
+		bra.b	0b
 
 		.endm
 
 // --------------------------------------------------------------------------
 
-.macro	PR_PROTECT:	buff_0_protect,buff_1_protect
+.macro	PR_PROTECT	buff_0_protect,buff_1_protect
 //		.local	PR_PROTECT_0,PR_PROTECT_1,PR_PROTECT_END
 					//  d0.w = buff_0_total
 					//  d1.w = buff_1_total
 	cmp.w	d0,d1
-	bge.b	2f  // PR_PROTECT_1		//  ‹ô <= Šï ‚È‚ç bra
-	// -------[ ‹ô > Šï ‚ÌŽžiŠï buff ‚É[X]ì¬j]
+	bge.b	2f  // PR_PROTECT_1		//  å¶ <= å¥‡ ãªã‚‰ bra
+	// -------[ å¶ > å¥‡ ã®æ™‚ï¼ˆå¥‡ buff ã«[X]ä½œæˆï¼‰]
 1:  // PR_PROTECT_0:
 		move.w	d0,d7
 		subq.w	#8,d7			//  d7.w = buff_0_total - 8
 		cmp.w	\buff_1_protect,d7
-		ble.b	3f  // PR_PROTECT_END		//  buff_1_protect >= d7 ‚È‚ç bra
+		ble.b	3f  // PR_PROTECT_END		//  buff_1_protect >= d7 ãªã‚‰ bra
 			move.w	d7,\buff_1_protect
 			bra.b	3f  // PR_PROTECT_END
 
-	// -------[ ‹ô <= Šï ‚ÌŽži‹ô buff ‚É[X]ì¬j]
+	// -------[ å¶ <= å¥‡ ã®æ™‚ï¼ˆå¶ buff ã«[X]ä½œæˆï¼‰]
 2:  // PR_PROTECT_1:					//  d1.w = buff_1_total
 		cmp.w	\buff_0_protect,d1
-		ble.b	3f  // PR_PROTECT_END		//  buff_0_protect >= d1 ‚È‚ç bra
+		ble.b	3f  // PR_PROTECT_END		//  buff_0_protect >= d1 ãªã‚‰ bra
 			move.w	d1,\buff_0_protect
 
 3: // PR_PROTECT_END:
@@ -96,30 +96,30 @@
 
 // ==========================================================================
 //
-// 	ƒ\[ƒgEƒAƒ‹ƒSƒŠƒYƒ€
+// 	ã‚½ãƒ¼ãƒˆãƒ»ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ 
 //
 // ==========================================================================
 
-					//  a0.l = ‘Š·—pƒoƒbƒtƒ@ŠÇ—\‘¢‘Ì
+					//  a0.l = æ›¸æ›ç”¨ãƒãƒƒãƒ•ã‚¡ç®¡ç†æ§‹é€ ä½“
 
-// -------[ ‰Šú‰» 1 ]
-	move.l	#8*65,d0		//  d0.l = •ªŠ„ƒoƒbƒtƒ@‚PŒÂ•ª‚ÌƒTƒCƒY
+// -------[ åˆæœŸåŒ– 1 ]
+	move.l	#8*65,d0		//  d0.l = åˆ†å‰²ãƒãƒƒãƒ•ã‚¡ï¼‘å€‹åˆ†ã®ã‚µã‚¤ã‚º
 
-	movea.l	div_buff(a0),a3		//  a3.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@A
+	movea.l	div_buff(a0),a3		//  a3.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡A
 	move.l	a3,d3
-	add.l	d0,d3			//  d3.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@B
+	add.l	d0,d3			//  d3.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡B
 	movea.l	d3,a4
-	adda.l	d0,a4			//  a4.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@C
+	adda.l	d0,a4			//  a4.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡C
 	move.l	a4,d4
-	add.l	d0,d4			//  d4.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@D
+	add.l	d0,d4			//  d4.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡D
 	movea.l	d4,a5
-	adda.l	d0,a5			//  a5.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@E
+	adda.l	d0,a5			//  a5.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡E
 	move.l	a5,d5
-	add.l	d0,d5			//  d5.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@F
+	add.l	d0,d5			//  d5.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡F
 	movea.l	d5,a6
-	adda.l	d0,a6			//  a6.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@G
+	adda.l	d0,a6			//  a6.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡G
 	move.l	a6,d6
-	add.l	d0,d6			//  d6.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@H
+	add.l	d0,d6			//  d6.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡H
 
 	moveq.l	#-1,d0
 	move.w	d0,8*65*0+8*64(a3)	//  end_mark(SP_x = -1)
@@ -132,7 +132,7 @@
 	move.w	d0,8*65*7+8*64(a3)	//  end_mark(SP_x = -1)
 
 
-// -------[ ‰Šú‰» 2i—Dæ“x•ÛŒìˆ——p ŠeŽíƒoƒbƒtƒ@‚Ì‰Šú‰»j]
+// -------[ åˆæœŸåŒ– 2ï¼ˆå„ªå…ˆåº¦ä¿è­·å‡¦ç†ç”¨ å„ç¨®ãƒãƒƒãƒ•ã‚¡ã®åˆæœŸåŒ–ï¼‰]
 	lea.l	buff_A_bak(pc),a2
 	move.w	a3,(a2)+
 	move.w	d3,(a2)+
@@ -149,189 +149,189 @@
 	move.l	d0,(a2)+
 	move.l	d0,(a2)+
 	move.l	d0,(a2)+
-	move.l	d0,(a2)+		//  ˆÈ‰ºAbuff_X_protect ‚Ì 0 ƒNƒŠƒA
+	move.l	d0,(a2)+		//  ä»¥ä¸‹ã€buff_X_protect ã® 0 ã‚¯ãƒªã‚¢
 	move.l	d0,(a2)+
 	move.l	d0,(a2)+
 	move.l	d0,(a2)+
 
 
-// -------[ ‰Šú‰» 3 ]
+// -------[ åˆæœŸåŒ– 3 ]
 					// ---------------------------------------
-					//  a0.l = ‰¼ƒoƒbƒtƒ@ƒXƒLƒƒƒ“ƒ|ƒCƒ“ƒ^
+					//  a0.l = ä»®ãƒãƒƒãƒ•ã‚¡ã‚¹ã‚­ãƒ£ãƒ³ãƒã‚¤ãƒ³ã‚¿
 					//  a1.l =
 					//  a2.l = temp
-					//  a3.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@A
-					//  a4.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@C
-					//  a5.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@E
-					//  a6.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@G
-					//  a7.l = PR ½æ“ªî•ñ“Ç‚Ýo‚µ—p
+					//  a3.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡A
+					//  a4.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡C
+					//  a5.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡E
+					//  a6.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡G
+					//  a7.l = PR éŽ–å…ˆé ­æƒ…å ±èª­ã¿å‡ºã—ç”¨
 					// ---------------------------------------
-					//  d0.l = tempiSP_x,SP_y “Ç‚Ý‚¾‚µj
+					//  d0.l = tempï¼ˆSP_x,SP_y èª­ã¿ã ã—ï¼‰
 					//  d1.l = temp
-	move.w	#0x1FC,d2		//  d2.w = SP_y ‰ºˆÊ 4 ƒrƒbƒgØ‚èŽÌ‚Ä—p and’l
-					//  d3.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@B
-					//  d4.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@D
-					//  d5.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@F
-					//  d6.l = #ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@H
-					//  d7.w = ˜A½” dbcc ƒJƒEƒ“ƒ^
+	move.w	#0x1FC,d2		//  d2.w = SP_y ä¸‹ä½ 4 ãƒ“ãƒƒãƒˆåˆ‡ã‚Šæ¨ã¦ç”¨ andå€¤
+					//  d3.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡B
+					//  d4.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡D
+					//  d5.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡F
+					//  d6.l = #ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡H
+					//  d7.w = é€£éŽ–æ•° dbcc ã‚«ã‚¦ãƒ³ã‚¿
 					// ---------------------------------------
 
 
-	move.l	(a7)+,a0		//  PR ‚²‚Æ‚Ìæ“ªƒAƒhƒŒƒX
-	move.w	CHAIN_OFS(a0),d7	//  ˜A½”i‚»‚Ì‚Ü‚Ü dbcc ƒJƒEƒ“ƒ^‚Æ‚µ‚ÄŽg‚¦‚éj
-	bmi	SORT_512b_END		//  ‚¢‚«‚È‚è˜A½”‚ª•‰iI“_j‚È‚çI—¹
+	move.l	(a7)+,a0		//  PR ã”ã¨ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	move.w	CHAIN_OFS(a0),d7	//  é€£éŽ–æ•°ï¼ˆãã®ã¾ã¾ dbcc ã‚«ã‚¦ãƒ³ã‚¿ã¨ã—ã¦ä½¿ãˆã‚‹ï¼‰
+	bmi	SORT_512b_END		//  ã„ããªã‚Šé€£éŽ–æ•°ãŒè² ï¼ˆçµ‚ç‚¹ï¼‰ãªã‚‰çµ‚äº†
 	bra	SORT_512b_LOOP
 
 
-// =======[ —Dæ“x•ÛŒìˆ— ]
+// =======[ å„ªå…ˆåº¦ä¿è­·å‡¦ç† ]
 SORT_512b_PRchange:
 
 
-// -------[ A`H ŠeX‚É‚Â‚¢‚Ä—Dæ“x•ÛŒìˆ— ]
-					//  a0.l ‚ÍAŽŸ‚Ì PR ½æ“ª‚ð“Ç‚Ýo‚·‚Ü‚Å free
+// -------[ Aã€œH å„ã€…ã«ã¤ã„ã¦å„ªå…ˆåº¦ä¿è­·å‡¦ç† ]
+					//  a0.l ã¯ã€æ¬¡ã® PR éŽ–å…ˆé ­ã‚’èª­ã¿å‡ºã™ã¾ã§ free
 	lea.l	buff_A_bak(pc),a0
 	lea.l	buff_A_used(pc),a1
 
-	move.w	a3,d0			//  d0.w = buff_X ƒ|ƒCƒ“ƒ^
-	sub.w	(a0),d0			//  d0.w = “]‘—”*8
-	move.w	d0,(a1)+		//  “]‘—”*8 •Û‘¶
-	move.w	a3,(a0)+		//  buff_X_bak ‚É ƒ|ƒCƒ“ƒ^•Û‘¶
+	move.w	a3,d0			//  d0.w = buff_X ãƒã‚¤ãƒ³ã‚¿
+	sub.w	(a0),d0			//  d0.w = è»¢é€æ•°*8
+	move.w	d0,(a1)+		//  è»¢é€æ•°*8 ä¿å­˜
+	move.w	a3,(a0)+		//  buff_X_bak ã« ãƒã‚¤ãƒ³ã‚¿ä¿å­˜
 
-	move.w	d3,d0			//  d0.w = buff_X ƒ|ƒCƒ“ƒ^
-	sub.w	(a0),d0			//  d0.w = “]‘—”*8
-	move.w	d0,(a1)+		//  “]‘—”*8 •Û‘¶
-	move.w	d3,(a0)+		//  buff_X_bak ‚É ƒ|ƒCƒ“ƒ^•Û‘¶
+	move.w	d3,d0			//  d0.w = buff_X ãƒã‚¤ãƒ³ã‚¿
+	sub.w	(a0),d0			//  d0.w = è»¢é€æ•°*8
+	move.w	d0,(a1)+		//  è»¢é€æ•°*8 ä¿å­˜
+	move.w	d3,(a0)+		//  buff_X_bak ã« ãƒã‚¤ãƒ³ã‚¿ä¿å­˜
 
-	move.w	a4,d0			//  d0.w = buff_X ƒ|ƒCƒ“ƒ^
-	sub.w	(a0),d0			//  d0.w = “]‘—”*8
-	move.w	d0,(a1)+		//  “]‘—”*8 •Û‘¶
-	move.w	a4,(a0)+		//  buff_X_bak ‚É ƒ|ƒCƒ“ƒ^•Û‘¶
+	move.w	a4,d0			//  d0.w = buff_X ãƒã‚¤ãƒ³ã‚¿
+	sub.w	(a0),d0			//  d0.w = è»¢é€æ•°*8
+	move.w	d0,(a1)+		//  è»¢é€æ•°*8 ä¿å­˜
+	move.w	a4,(a0)+		//  buff_X_bak ã« ãƒã‚¤ãƒ³ã‚¿ä¿å­˜
 
-	move.w	d4,d0			//  d0.w = buff_X ƒ|ƒCƒ“ƒ^
-	sub.w	(a0),d0			//  d0.w = “]‘—”*8
-	move.w	d0,(a1)+		//  “]‘—”*8 •Û‘¶
-	move.w	d4,(a0)+		//  buff_X_bak ‚É ƒ|ƒCƒ“ƒ^•Û‘¶
+	move.w	d4,d0			//  d0.w = buff_X ãƒã‚¤ãƒ³ã‚¿
+	sub.w	(a0),d0			//  d0.w = è»¢é€æ•°*8
+	move.w	d0,(a1)+		//  è»¢é€æ•°*8 ä¿å­˜
+	move.w	d4,(a0)+		//  buff_X_bak ã« ãƒã‚¤ãƒ³ã‚¿ä¿å­˜
 
-	move.w	a5,d0			//  d0.w = buff_X ƒ|ƒCƒ“ƒ^
-	sub.w	(a0),d0			//  d0.w = “]‘—”*8
-	move.w	d0,(a1)+		//  “]‘—”*8 •Û‘¶
-	move.w	a5,(a0)+		//  buff_X_bak ‚É ƒ|ƒCƒ“ƒ^•Û‘¶
+	move.w	a5,d0			//  d0.w = buff_X ãƒã‚¤ãƒ³ã‚¿
+	sub.w	(a0),d0			//  d0.w = è»¢é€æ•°*8
+	move.w	d0,(a1)+		//  è»¢é€æ•°*8 ä¿å­˜
+	move.w	a5,(a0)+		//  buff_X_bak ã« ãƒã‚¤ãƒ³ã‚¿ä¿å­˜
 
-	move.w	d5,d0			//  d0.w = buff_X ƒ|ƒCƒ“ƒ^
-	sub.w	(a0),d0			//  d0.w = “]‘—”*8
-	move.w	d0,(a1)+		//  “]‘—”*8 •Û‘¶
-	move.w	d5,(a0)+		//  buff_X_bak ‚É ƒ|ƒCƒ“ƒ^•Û‘¶
+	move.w	d5,d0			//  d0.w = buff_X ãƒã‚¤ãƒ³ã‚¿
+	sub.w	(a0),d0			//  d0.w = è»¢é€æ•°*8
+	move.w	d0,(a1)+		//  è»¢é€æ•°*8 ä¿å­˜
+	move.w	d5,(a0)+		//  buff_X_bak ã« ãƒã‚¤ãƒ³ã‚¿ä¿å­˜
 
-	move.w	a6,d0			//  d0.w = buff_X ƒ|ƒCƒ“ƒ^
-	sub.w	(a0),d0			//  d0.w = “]‘—”*8
-	move.w	d0,(a1)+		//  “]‘—”*8 •Û‘¶
-	move.w	a6,(a0)+		//  buff_X_bak ‚É ƒ|ƒCƒ“ƒ^•Û‘¶
+	move.w	a6,d0			//  d0.w = buff_X ãƒã‚¤ãƒ³ã‚¿
+	sub.w	(a0),d0			//  d0.w = è»¢é€æ•°*8
+	move.w	d0,(a1)+		//  è»¢é€æ•°*8 ä¿å­˜
+	move.w	a6,(a0)+		//  buff_X_bak ã« ãƒã‚¤ãƒ³ã‚¿ä¿å­˜
 
-	move.w	d6,d0			//  d0.w = buff_X ƒ|ƒCƒ“ƒ^
-	sub.w	(a0),d0			//  d0.w = “]‘—”*8
-	move.w	d0,(a1)+		//  “]‘—”*8 •Û‘¶
-	move.w	d6,(a0)+		//  buff_X_bak ‚É ƒ|ƒCƒ“ƒ^•Û‘¶
+	move.w	d6,d0			//  d0.w = buff_X ãƒã‚¤ãƒ³ã‚¿
+	sub.w	(a0),d0			//  d0.w = è»¢é€æ•°*8
+	move.w	d0,(a1)+		//  è»¢é€æ•°*8 ä¿å­˜
+	move.w	d6,(a0)+		//  buff_X_bak ã« ãƒã‚¤ãƒ³ã‚¿ä¿å­˜
 
 
 
 	lea.l	buff_A_total(pc),a0
 	lea.l	buff_A_used(pc),a1
 
-	move.w	(a1)+,d0			//  d0.w = “]‘—”*8
+	move.w	(a1)+,d0			//  d0.w = è»¢é€æ•°*8
 	beq.b	0f
-		movea.l	a3,a2			//  a2.l = buff_X ƒ|ƒCƒ“ƒ^
-		sub.w	d0,a2			//  a2.l = buff_X ‚Ì “¯ˆê PR ƒuƒƒbƒN‚Ìæ“ª
-		move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚Ìu“]‘—”*8v‚É‘ž‚Ý
+		movea.l	a3,a2			//  a2.l = buff_X ãƒã‚¤ãƒ³ã‚¿
+		sub.w	d0,a2			//  a2.l = buff_X ã® åŒä¸€ PR ãƒ–ãƒ­ãƒƒã‚¯ã®å…ˆé ­
+		move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œè»¢é€æ•°*8ã€ã«æ›¸è¾¼ã¿
 		move.w	16(a0),d1		//  d1.w  = buff_X_protect
 		sub.w	(a0),d1			//  d1.w -= buff_X_total
-		add.w	d1,d0			//  buff_X_total ‚É ƒXƒLƒbƒv”*8 ‰ÁŽZ
-		add.w	d1,d1			//  d1.w = ƒXƒLƒbƒv”*16
-		move.w	d1,CHAIN_OFS_div(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚ÌuƒXƒLƒbƒv”*8v‚É‘ž‚Ý
-0:	add.w	d0,(a0)+			//  buff_X_total ‚É “]‘—”*8 ‰ÁŽZ
+		add.w	d1,d0			//  buff_X_total ã« ã‚¹ã‚­ãƒƒãƒ—æ•°*8 åŠ ç®—
+		add.w	d1,d1			//  d1.w = ã‚¹ã‚­ãƒƒãƒ—æ•°*16
+		move.w	d1,CHAIN_OFS_div(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œã‚¹ã‚­ãƒƒãƒ—æ•°*8ã€ã«æ›¸è¾¼ã¿
+0:	add.w	d0,(a0)+			//  buff_X_total ã« è»¢é€æ•°*8 åŠ ç®—
 
-	move.w	(a1)+,d0			//  d0.w = “]‘—”*8
+	move.w	(a1)+,d0			//  d0.w = è»¢é€æ•°*8
 	beq.b	0f
-		movea.l	d3,a2			//  a2.l = buff_X ƒ|ƒCƒ“ƒ^
-		sub.w	d0,a2			//  a2.l = buff_X ‚Ì “¯ˆê PR ƒuƒƒbƒN‚Ìæ“ª
-		move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚Ìu“]‘—”*8v‚É‘ž‚Ý
+		movea.l	d3,a2			//  a2.l = buff_X ãƒã‚¤ãƒ³ã‚¿
+		sub.w	d0,a2			//  a2.l = buff_X ã® åŒä¸€ PR ãƒ–ãƒ­ãƒƒã‚¯ã®å…ˆé ­
+		move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œè»¢é€æ•°*8ã€ã«æ›¸è¾¼ã¿
 		move.w	16(a0),d1		//  d1.w  = buff_X_protect
 		sub.w	(a0),d1			//  d1.w -= buff_X_total
-		add.w	d1,d0			//  buff_X_total ‚É ƒXƒLƒbƒv”*8 ‰ÁŽZ
-		add.w	d1,d1			//  d1.w = ƒXƒLƒbƒv”*16
-		move.w	d1,CHAIN_OFS_div(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚ÌuƒXƒLƒbƒv”*8v‚É‘ž‚Ý
-0:	add.w	d0,(a0)+			//  buff_X_total‚É “]‘—”*8 ‰ÁŽZ
+		add.w	d1,d0			//  buff_X_total ã« ã‚¹ã‚­ãƒƒãƒ—æ•°*8 åŠ ç®—
+		add.w	d1,d1			//  d1.w = ã‚¹ã‚­ãƒƒãƒ—æ•°*16
+		move.w	d1,CHAIN_OFS_div(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œã‚¹ã‚­ãƒƒãƒ—æ•°*8ã€ã«æ›¸è¾¼ã¿
+0:	add.w	d0,(a0)+			//  buff_X_totalã« è»¢é€æ•°*8 åŠ ç®—
 
-	move.w	(a1)+,d0			//  d0.w = “]‘—”*8
+	move.w	(a1)+,d0			//  d0.w = è»¢é€æ•°*8
 	beq.b	0f
-		movea.l	a4,a2			//  a2.l = buff_X ƒ|ƒCƒ“ƒ^
-		sub.w	d0,a2			//  a2.l = buff_X ‚Ì “¯ˆê PR ƒuƒƒbƒN‚Ìæ“ª
-		move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚Ìu“]‘—”*8v‚É‘ž‚Ý
+		movea.l	a4,a2			//  a2.l = buff_X ãƒã‚¤ãƒ³ã‚¿
+		sub.w	d0,a2			//  a2.l = buff_X ã® åŒä¸€ PR ãƒ–ãƒ­ãƒƒã‚¯ã®å…ˆé ­
+		move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œè»¢é€æ•°*8ã€ã«æ›¸è¾¼ã¿
 		move.w	16(a0),d1		//  d1.w  = buff_X_protect
 		sub.w	(a0),d1			//  d1.w -= buff_X_total
-		add.w	d1,d0			//  buff_X_total ‚É ƒXƒLƒbƒv”*8 ‰ÁŽZ
-		add.w	d1,d1			//  d1.w = ƒXƒLƒbƒv”*16
-		move.w	d1,CHAIN_OFS_div(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚ÌuƒXƒLƒbƒv”*8v‚É‘ž‚Ý
-0:	add.w	d0,(a0)+			//  buff_X_total‚É “]‘—”*8 ‰ÁŽZ
+		add.w	d1,d0			//  buff_X_total ã« ã‚¹ã‚­ãƒƒãƒ—æ•°*8 åŠ ç®—
+		add.w	d1,d1			//  d1.w = ã‚¹ã‚­ãƒƒãƒ—æ•°*16
+		move.w	d1,CHAIN_OFS_div(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œã‚¹ã‚­ãƒƒãƒ—æ•°*8ã€ã«æ›¸è¾¼ã¿
+0:	add.w	d0,(a0)+			//  buff_X_totalã« è»¢é€æ•°*8 åŠ ç®—
 
-	move.w	(a1)+,d0			//  d0.w = “]‘—”*8
+	move.w	(a1)+,d0			//  d0.w = è»¢é€æ•°*8
 	beq.b	0f
-		movea.l	d4,a2			//  a2.l = buff_X ƒ|ƒCƒ“ƒ^
-		sub.w	d0,a2			//  a2.l = buff_X ‚Ì “¯ˆê PR ƒuƒƒbƒN‚Ìæ“ª
-		move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚Ìu“]‘—”*8v‚É‘ž‚Ý
+		movea.l	d4,a2			//  a2.l = buff_X ãƒã‚¤ãƒ³ã‚¿
+		sub.w	d0,a2			//  a2.l = buff_X ã® åŒä¸€ PR ãƒ–ãƒ­ãƒƒã‚¯ã®å…ˆé ­
+		move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œè»¢é€æ•°*8ã€ã«æ›¸è¾¼ã¿
 		move.w	16(a0),d1		//  d1.w  = buff_X_protect
 		sub.w	(a0),d1			//  d1.w -= buff_X_total
-		add.w	d1,d0			//  buff_X_total ‚É ƒXƒLƒbƒv”*8 ‰ÁŽZ
-		add.w	d1,d1			//  d1.w = ƒXƒLƒbƒv”*16
-		move.w	d1,CHAIN_OFS_div(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚ÌuƒXƒLƒbƒv”*8v‚É‘ž‚Ý
-0:	add.w	d0,(a0)+			//  buff_X_total‚É “]‘—”*8 ‰ÁŽZ
+		add.w	d1,d0			//  buff_X_total ã« ã‚¹ã‚­ãƒƒãƒ—æ•°*8 åŠ ç®—
+		add.w	d1,d1			//  d1.w = ã‚¹ã‚­ãƒƒãƒ—æ•°*16
+		move.w	d1,CHAIN_OFS_div(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œã‚¹ã‚­ãƒƒãƒ—æ•°*8ã€ã«æ›¸è¾¼ã¿
+0:	add.w	d0,(a0)+			//  buff_X_totalã« è»¢é€æ•°*8 åŠ ç®—
 
-	move.w	(a1)+,d0			//  d0.w = “]‘—”*8
+	move.w	(a1)+,d0			//  d0.w = è»¢é€æ•°*8
 	beq.b	0f
-		movea.l	a5,a2			//  a2.l = buff_X ƒ|ƒCƒ“ƒ^
-		sub.w	d0,a2			//  a2.l = buff_X ‚Ì “¯ˆê PR ƒuƒƒbƒN‚Ìæ“ª
-		move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚Ìu“]‘—”*8v‚É‘ž‚Ý
+		movea.l	a5,a2			//  a2.l = buff_X ãƒã‚¤ãƒ³ã‚¿
+		sub.w	d0,a2			//  a2.l = buff_X ã® åŒä¸€ PR ãƒ–ãƒ­ãƒƒã‚¯ã®å…ˆé ­
+		move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œè»¢é€æ•°*8ã€ã«æ›¸è¾¼ã¿
 		move.w	16(a0),d1		//  d1.w  = buff_X_protect
 		sub.w	(a0),d1			//  d1.w -= buff_X_total
-		add.w	d1,d0			//  buff_X_total ‚É ƒXƒLƒbƒv”*8 ‰ÁŽZ
-		add.w	d1,d1			//  d1.w = ƒXƒLƒbƒv”*16
-		move.w	d1,CHAIN_OFS_div(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚ÌuƒXƒLƒbƒv”*8v‚É‘ž‚Ý
-0:	add.w	d0,(a0)+			//  buff_X_total‚É “]‘—”*8 ‰ÁŽZ
+		add.w	d1,d0			//  buff_X_total ã« ã‚¹ã‚­ãƒƒãƒ—æ•°*8 åŠ ç®—
+		add.w	d1,d1			//  d1.w = ã‚¹ã‚­ãƒƒãƒ—æ•°*16
+		move.w	d1,CHAIN_OFS_div(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œã‚¹ã‚­ãƒƒãƒ—æ•°*8ã€ã«æ›¸è¾¼ã¿
+0:	add.w	d0,(a0)+			//  buff_X_totalã« è»¢é€æ•°*8 åŠ ç®—
 
-	move.w	(a1)+,d0			//  d0.w = “]‘—”*8
+	move.w	(a1)+,d0			//  d0.w = è»¢é€æ•°*8
 	beq.b	0f
-		movea.l	d5,a2			//  a2.l = buff_X ƒ|ƒCƒ“ƒ^
-		sub.w	d0,a2			//  a2.l = buff_X ‚Ì “¯ˆê PR ƒuƒƒbƒN‚Ìæ“ª
-		move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚Ìu“]‘—”*8v‚É‘ž‚Ý
+		movea.l	d5,a2			//  a2.l = buff_X ãƒã‚¤ãƒ³ã‚¿
+		sub.w	d0,a2			//  a2.l = buff_X ã® åŒä¸€ PR ãƒ–ãƒ­ãƒƒã‚¯ã®å…ˆé ­
+		move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œè»¢é€æ•°*8ã€ã«æ›¸è¾¼ã¿
 		move.w	16(a0),d1		//  d1.w  = buff_X_protect
 		sub.w	(a0),d1			//  d1.w -= buff_X_total
-		add.w	d1,d0			//  buff_X_total ‚É ƒXƒLƒbƒv”*8 ‰ÁŽZ
-		add.w	d1,d1			//  d1.w = ƒXƒLƒbƒv”*16
-		move.w	d1,CHAIN_OFS_div(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚ÌuƒXƒLƒbƒv”*8v‚É‘ž‚Ý
-0:	add.w	d0,(a0)+			//  buff_X_total‚É “]‘—”*8 ‰ÁŽZ
+		add.w	d1,d0			//  buff_X_total ã« ã‚¹ã‚­ãƒƒãƒ—æ•°*8 åŠ ç®—
+		add.w	d1,d1			//  d1.w = ã‚¹ã‚­ãƒƒãƒ—æ•°*16
+		move.w	d1,CHAIN_OFS_div(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œã‚¹ã‚­ãƒƒãƒ—æ•°*8ã€ã«æ›¸è¾¼ã¿
+0:	add.w	d0,(a0)+			//  buff_X_totalã« è»¢é€æ•°*8 åŠ ç®—
 
-	move.w	(a1)+,d0			//  d0.w = “]‘—”*8
+	move.w	(a1)+,d0			//  d0.w = è»¢é€æ•°*8
 	beq.b	0f
-		movea.l	a6,a2			//  a2.l = buff_X ƒ|ƒCƒ“ƒ^
-		sub.w	d0,a2			//  a2.l = buff_X ‚Ì “¯ˆê PR ƒuƒƒbƒN‚Ìæ“ª
-		move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚Ìu“]‘—”*8v‚É‘ž‚Ý
+		movea.l	a6,a2			//  a2.l = buff_X ãƒã‚¤ãƒ³ã‚¿
+		sub.w	d0,a2			//  a2.l = buff_X ã® åŒä¸€ PR ãƒ–ãƒ­ãƒƒã‚¯ã®å…ˆé ­
+		move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œè»¢é€æ•°*8ã€ã«æ›¸è¾¼ã¿
 		move.w	16(a0),d1		//  d1.w  = buff_X_protect
 		sub.w	(a0),d1			//  d1.w -= buff_X_total
-		add.w	d1,d0			//  buff_X_total ‚É ƒXƒLƒbƒv”*8 ‰ÁŽZ
-		add.w	d1,d1			//  d1.w = ƒXƒLƒbƒv”*16
-		move.w	d1,CHAIN_OFS_div(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚ÌuƒXƒLƒbƒv”*8v‚É‘ž‚Ý
-0:	add.w	d0,(a0)+			//  buff_X_total‚É “]‘—”*8 ‰ÁŽZ
+		add.w	d1,d0			//  buff_X_total ã« ã‚¹ã‚­ãƒƒãƒ—æ•°*8 åŠ ç®—
+		add.w	d1,d1			//  d1.w = ã‚¹ã‚­ãƒƒãƒ—æ•°*16
+		move.w	d1,CHAIN_OFS_div(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œã‚¹ã‚­ãƒƒãƒ—æ•°*8ã€ã«æ›¸è¾¼ã¿
+0:	add.w	d0,(a0)+			//  buff_X_totalã« è»¢é€æ•°*8 åŠ ç®—
 
-	move.w	(a1)+,d0			//  d0.w = “]‘—”*8
+	move.w	(a1)+,d0			//  d0.w = è»¢é€æ•°*8
 	beq.b	0f
-		movea.l	d6,a2			//  a2.l = buff_X ƒ|ƒCƒ“ƒ^
-		sub.w	d0,a2			//  a2.l = buff_X ‚Ì “¯ˆê PR ƒuƒƒbƒN‚Ìæ“ª
-		move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚Ìu“]‘—”*8v‚É‘ž‚Ý
+		movea.l	d6,a2			//  a2.l = buff_X ãƒã‚¤ãƒ³ã‚¿
+		sub.w	d0,a2			//  a2.l = buff_X ã® åŒä¸€ PR ãƒ–ãƒ­ãƒƒã‚¯ã®å…ˆé ­
+		move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œè»¢é€æ•°*8ã€ã«æ›¸è¾¼ã¿
 		move.w	16(a0),d1		//  d1.w  = buff_X_protect
 		sub.w	(a0),d1			//  d1.w -= buff_X_total
-		add.w	d1,d0			//  buff_X_total ‚É ƒXƒLƒbƒv”*8 ‰ÁŽZ
-		add.w	d1,d1			//  d1.w = ƒXƒLƒbƒv”*16
-		move.w	d1,CHAIN_OFS_div(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚ÌuƒXƒLƒbƒv”*8v‚É‘ž‚Ý
-0:	add.w	d0,(a0)+			//  buff_X_total‚É “]‘—”*8 ‰ÁŽZ
+		add.w	d1,d0			//  buff_X_total ã« ã‚¹ã‚­ãƒƒãƒ—æ•°*8 åŠ ç®—
+		add.w	d1,d1			//  d1.w = ã‚¹ã‚­ãƒƒãƒ—æ•°*16
+		move.w	d1,CHAIN_OFS_div(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã®ã€Œã‚¹ã‚­ãƒƒãƒ—æ•°*8ã€ã«æ›¸è¾¼ã¿
+0:	add.w	d0,(a0)+			//  buff_X_totalã« è»¢é€æ•°*8 åŠ ç®—
 
 
 
@@ -346,27 +346,27 @@ SORT_512b_PRchange:
 
 	lea.l	buff_A_protect(pc),a0
 	lea.l	buff_A_total(pc),a1
-						//  ƒoƒbƒtƒ@‚’á·”äŠr & ƒXƒLƒbƒvî•ñ‚ÌŽZo
+						//  ãƒãƒƒãƒ•ã‚¡é«˜ä½Žå·®æ¯”è¼ƒ & ã‚¹ã‚­ãƒƒãƒ—æƒ…å ±ã®ç®—å‡º
 						//  PR_PROTECT	 buff_0_protect,buff_1_protect
 	move.w	(a1)+,d0			//  d0.w = buff_A_total
 	move.w	(a1)+,d1			//  d1.w = buff_B_total
-	PR_PROTECT	00(a0),02(a0)
+	PR_PROTECT	0(a0),2(a0)
 
 	move.w	(a1)+,d0			//  d0.w = buff_C_total
 						//  d1.w = buff_B_total
-	PR_PROTECT	04(a0),02(a0)
+	PR_PROTECT	4(a0),2(a0)
 
 						//  d0.w = buff_C_total
 	move.w	(a1)+,d1			//  d1.w = buff_D_total
-	PR_PROTECT	04(a0),06(a0)
+	PR_PROTECT	4(a0),6(a0)
 
 	move.w	(a1)+,d0			//  d0.w = buff_E_total
 						//  d1.w = buff_D_total
-	PR_PROTECT	08(a0),06(a0)
+	PR_PROTECT	8(a0),6(a0)
 
 						//  d0.w = buff_E_total
 	move.w	(a1)+,d1			//  d1.w = buff_F_total
-	PR_PROTECT	08(a0),10(a0)
+	PR_PROTECT	8(a0),10(a0)
 
 	move.w	(a1)+,d0			//  d0.w = buff_G_total
 						//  d1.w = buff_F_total
@@ -378,36 +378,54 @@ SORT_512b_PRchange:
 
 
 
-// =======[ PR •ÏX ]
-	move.l	(a7)+,a0		//  ŽŸ‚Ì PR æ“ªƒAƒhƒŒƒX
-	move.w	CHAIN_OFS(a0),d7	//  ˜A½”i‚»‚Ì‚Ü‚Ü dbcc ƒJƒEƒ“ƒ^‚Æ‚µ‚ÄŽg‚¦‚éj
-	bmi	SORT_512b_END		//  ˜A½” < 0 ‚È‚çI—¹
+// =======[ PR å¤‰æ›´ ]
+	move.l	(a7)+,a0		//  æ¬¡ã® PR å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	move.w	CHAIN_OFS(a0),d7	//  é€£éŽ–æ•°ï¼ˆãã®ã¾ã¾ dbcc ã‚«ã‚¦ãƒ³ã‚¿ã¨ã—ã¦ä½¿ãˆã‚‹ï¼‰
+	bmi	SORT_512b_END		//  é€£éŽ–æ•° < 0 ãªã‚‰çµ‚äº†
 
 
-// =======[ ƒ\[ƒeƒBƒ“ƒOˆ—ƒ‹[ƒv ]
+// =======[ ã‚½ãƒ¼ãƒ†ã‚£ãƒ³ã‚°å‡¦ç†ãƒ«ãƒ¼ãƒ— ]
 SORT_512b_LOOP:
 	move.l	(a0)+,d0			// [12]	d0.l = x,y
 	move.w	d0,d1				// [ 4]	d1.w = y
 	and.w	d2,d1				// [ 4]	d1.w = y & $1FC
-	movea.l	SORT_512b_JPTBL(pc,d1.w),a2	// [18]	a2.l = ƒuƒ‰ƒ“ƒ`æƒAƒhƒŒƒX
-	jmp	(a2)				// [ 8]	ƒuƒ‰ƒ“ƒ`
+	movea.l	SORT_512b_JPTBL(pc,d1.w),a2	// [18]	a2.l = ãƒ–ãƒ©ãƒ³ãƒå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹
+	jmp	(a2)				// [ 8]	ãƒ–ãƒ©ãƒ³ãƒ
 
 
-// =======[ Y À•W•ÊƒWƒƒƒ“ƒvƒe[ƒuƒ‹ ]
+// =======[ Y åº§æ¨™åˆ¥ã‚¸ãƒ£ãƒ³ãƒ—ãƒ†ãƒ¼ãƒ–ãƒ« ]
 SORT_512b_JPTBL:
-	dcb.l	9,SORT_512b_A		//  36dot
-	dcb.l	8,SORT_512b_B		//  32dot
-	dcb.l	9,SORT_512b_C		//  36dot
-	dcb.l	8,SORT_512b_D		//  32dot
-	dcb.l	9,SORT_512b_E		//  36dot
-	dcb.l	8,SORT_512b_F		//  32dot
-	dcb.l	9,SORT_512b_G		//  36dot
-	dcb.l	8,SORT_512b_H		//  32dot
+	.rept	9
+	dc.l	SORT_512b_A		//  36dot
+	.endr
+	.rept	8
+	dc.l	SORT_512b_B		//  32dot
+	.endr
+	.rept	9
+	dc.l	SORT_512b_C		//  36dot
+	.endr
+	.rept	8
+	dc.l	SORT_512b_D		//  32dot
+	.endr
+	.rept	9
+	dc.l	SORT_512b_E		//  36dot
+	.endr
+	.rept	8
+	dc.l	SORT_512b_F		//  32dot
+	.endr
+	.rept	9
+	dc.l	SORT_512b_G		//  36dot
+	.endr
+	.rept	8
+	dc.l	SORT_512b_H		//  32dot
+	.endr
 
-	dcb.l	128-(8+9)*4,SORT_512b_H	//  ƒ_ƒ~[
+	.rept	128-(8+9)*4
+	dc.l	SORT_512b_H	//  ãƒ€ãƒŸãƒ¼
+	.endr
 
 
-// =======[ ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@‚É“o˜^ ]
+// =======[ ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡ã«ç™»éŒ² ]
 SORT_512b_A:	SORT_512b_An	a3
 SORT_512b_B:	SORT_512b_Dn	d3
 SORT_512b_C:	SORT_512b_An	a4
@@ -418,7 +436,7 @@ SORT_512b_G:	SORT_512b_An	a6
 SORT_512b_H:	SORT_512b_Dn	d6
 
 
-// =======[ —Dæ“x•ÛŒìˆ——p ŠeŽíƒoƒbƒtƒ@ ]
+// =======[ å„ªå…ˆåº¦ä¿è­·å‡¦ç†ç”¨ å„ç¨®ãƒãƒƒãƒ•ã‚¡ ]
 buff_A_total:	dc.w	0
 buff_B_total:	dc.w	0
 buff_C_total:	dc.w	0
@@ -427,7 +445,7 @@ buff_E_total:	dc.w	0
 buff_F_total:	dc.w	0
 buff_G_total:	dc.w	0
 buff_H_total:	dc.w	0
-// ª«—¼ŽÒ‚ÍA˜A‘±‚µ‚½ƒƒ‚ƒŠ‹óŠÔ‚É‘¶Ý‚·‚é‚±‚Æ
+// â†‘â†“ä¸¡è€…ã¯ã€é€£ç¶šã—ãŸãƒ¡ãƒ¢ãƒªç©ºé–“ã«å­˜åœ¨ã™ã‚‹ã“ã¨
 buff_A_protect:	dc.w	0
 buff_B_protect:	dc.w	0
 buff_C_protect:	dc.w	0
@@ -461,173 +479,173 @@ SORT_512b_END:
 
 // ==========================================================================
 //
-// 	Å‘å 512 –‡ƒ‚[ƒh •ªŠ„ƒ‰ƒXƒ^ˆÚ“® ‚»‚Ì‘¼
+// 	æœ€å¤§ 512 æžšãƒ¢ãƒ¼ãƒ‰ åˆ†å‰²ãƒ©ã‚¹ã‚¿ç§»å‹• ãã®ä»–
 //
 // ==========================================================================
 
-// -------[ ƒ`ƒFƒCƒ“î•ñ––’[‚É end_mark ‘‚«ž‚Ý ]
+// -------[ ãƒã‚§ã‚¤ãƒ³æƒ…å ±æœ«ç«¯ã« end_mark æ›¸ãè¾¼ã¿ ]
 
 	moveq.l	#0,d0			//  d0.l = 0
 
-	move.w	d0,CHAIN_OFS_div+2(a3)	//  ƒ`ƒFƒCƒ“î•ñ‚É end_marki“]‘—”*8 = 0j‘‚«ž‚Ý
+	move.w	d0,CHAIN_OFS_div+2(a3)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã« end_markï¼ˆè»¢é€æ•°*8 = 0ï¼‰æ›¸ãè¾¼ã¿
 	movea.l	d3,a2
-	move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚É end_marki“]‘—”*8 = 0j‘‚«ž‚Ý
+	move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã« end_markï¼ˆè»¢é€æ•°*8 = 0ï¼‰æ›¸ãè¾¼ã¿
 
-	move.w	d0,CHAIN_OFS_div+2(a4)	//  ƒ`ƒFƒCƒ“î•ñ‚É end_marki“]‘—”*8 = 0j‘‚«ž‚Ý
+	move.w	d0,CHAIN_OFS_div+2(a4)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã« end_markï¼ˆè»¢é€æ•°*8 = 0ï¼‰æ›¸ãè¾¼ã¿
 	movea.l	d4,a2
-	move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚É end_marki“]‘—”*8 = 0j‘‚«ž‚Ý
+	move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã« end_markï¼ˆè»¢é€æ•°*8 = 0ï¼‰æ›¸ãè¾¼ã¿
 
-	move.w	d0,CHAIN_OFS_div+2(a5)	//  ƒ`ƒFƒCƒ“î•ñ‚É end_marki“]‘—”*8 = 0j‘‚«ž‚Ý
+	move.w	d0,CHAIN_OFS_div+2(a5)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã« end_markï¼ˆè»¢é€æ•°*8 = 0ï¼‰æ›¸ãè¾¼ã¿
 	movea.l	d5,a2
-	move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚É end_marki“]‘—”*8 = 0j‘‚«ž‚Ý
+	move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã« end_markï¼ˆè»¢é€æ•°*8 = 0ï¼‰æ›¸ãè¾¼ã¿
 
-	move.w	d0,CHAIN_OFS_div+2(a6)	//  ƒ`ƒFƒCƒ“î•ñ‚É end_marki“]‘—”*8 = 0j‘‚«ž‚Ý
+	move.w	d0,CHAIN_OFS_div+2(a6)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã« end_markï¼ˆè»¢é€æ•°*8 = 0ï¼‰æ›¸ãè¾¼ã¿
 	movea.l	d6,a2
-	move.w	d0,CHAIN_OFS_div+2(a2)	//  ƒ`ƒFƒCƒ“î•ñ‚É end_marki“]‘—”*8 = 0j‘‚«ž‚Ý
+	move.w	d0,CHAIN_OFS_div+2(a2)	//  ãƒã‚§ã‚¤ãƒ³æƒ…å ±ã« end_markï¼ˆè»¢é€æ•°*8 = 0ï¼‰æ›¸ãè¾¼ã¿
 
 
-// -------[ Še•ªŠ„ƒuƒƒbƒN‚ÌŽg—p”‚ð‹‚ß‚é ]
-	move.l	write_struct(pc),a0	//  a0.l = ‘Š·—pƒoƒbƒtƒ@ŠÇ—\‘¢‘Ì
-	movea.l	div_buff(a0),a1		//  a1.l = ƒoƒbƒtƒ@A æ“ªƒAƒhƒŒƒX
-	move.l	#8*65,d0		//  d0.l = •ªŠ„ƒoƒbƒtƒ@ 1 ŒÂ•ª‚ÌƒTƒCƒY
+// -------[ å„åˆ†å‰²ãƒ–ãƒ­ãƒƒã‚¯ã®ä½¿ç”¨æ•°ã‚’æ±‚ã‚ã‚‹ ]
+	move.l	write_struct(pc),a0	//  a0.l = æ›¸æ›ç”¨ãƒãƒƒãƒ•ã‚¡ç®¡ç†æ§‹é€ ä½“
+	movea.l	div_buff(a0),a1		//  a1.l = ãƒãƒƒãƒ•ã‚¡A å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	move.l	#8*65,d0		//  d0.l = åˆ†å‰²ãƒãƒƒãƒ•ã‚¡ 1 å€‹åˆ†ã®ã‚µã‚¤ã‚º
 
-					//  a1.l = ƒoƒbƒtƒ@A æ“ªƒAƒhƒŒƒX
-	suba.l	a1,a3			//  a3.l = ƒoƒbƒtƒ@A Žg—p”*8
-	adda.l	d0,a1			//  a1.l = ƒoƒbƒtƒ@B æ“ªƒAƒhƒŒƒX
-	sub.l	a1,d3			//  d3.l = ƒoƒbƒtƒ@B Žg—p”*8
-	adda.l	d0,a1			//  a1.l = ƒoƒbƒtƒ@C æ“ªƒAƒhƒŒƒX
-	suba.l	a1,a4			//  a4.l = ƒoƒbƒtƒ@C Žg—p”*8
-	adda.l	d0,a1			//  a1.l = ƒoƒbƒtƒ@D æ“ªƒAƒhƒŒƒX
-	sub.l	a1,d4			//  d4.l = ƒoƒbƒtƒ@D Žg—p”*8
-	adda.l	d0,a1			//  a1.l = ƒoƒbƒtƒ@E æ“ªƒAƒhƒŒƒX
-	suba.l	a1,a5			//  a5.l = ƒoƒbƒtƒ@E Žg—p”*8
-	adda.l	d0,a1			//  a1.l = ƒoƒbƒtƒ@F æ“ªƒAƒhƒŒƒX
-	sub.l	a1,d5			//  d5.l = ƒoƒbƒtƒ@F Žg—p”*8
-	adda.l	d0,a1			//  a1.l = ƒoƒbƒtƒ@G æ“ªƒAƒhƒŒƒX
-	suba.l	a1,a6			//  a6.l = ƒoƒbƒtƒ@G Žg—p”*8
-	adda.l	d0,a1			//  a1.l = ƒoƒbƒtƒ@H æ“ªƒAƒhƒŒƒX
-	sub.l	a1,d6			//  d6.l = ƒoƒbƒtƒ@H Žg—p”*8
+					//  a1.l = ãƒãƒƒãƒ•ã‚¡A å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	suba.l	a1,a3			//  a3.l = ãƒãƒƒãƒ•ã‚¡A ä½¿ç”¨æ•°*8
+	adda.l	d0,a1			//  a1.l = ãƒãƒƒãƒ•ã‚¡B å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	sub.l	a1,d3			//  d3.l = ãƒãƒƒãƒ•ã‚¡B ä½¿ç”¨æ•°*8
+	adda.l	d0,a1			//  a1.l = ãƒãƒƒãƒ•ã‚¡C å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	suba.l	a1,a4			//  a4.l = ãƒãƒƒãƒ•ã‚¡C ä½¿ç”¨æ•°*8
+	adda.l	d0,a1			//  a1.l = ãƒãƒƒãƒ•ã‚¡D å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	sub.l	a1,d4			//  d4.l = ãƒãƒƒãƒ•ã‚¡D ä½¿ç”¨æ•°*8
+	adda.l	d0,a1			//  a1.l = ãƒãƒƒãƒ•ã‚¡E å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	suba.l	a1,a5			//  a5.l = ãƒãƒƒãƒ•ã‚¡E ä½¿ç”¨æ•°*8
+	adda.l	d0,a1			//  a1.l = ãƒãƒƒãƒ•ã‚¡F å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	sub.l	a1,d5			//  d5.l = ãƒãƒƒãƒ•ã‚¡F ä½¿ç”¨æ•°*8
+	adda.l	d0,a1			//  a1.l = ãƒãƒƒãƒ•ã‚¡G å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	suba.l	a1,a6			//  a6.l = ãƒãƒƒãƒ•ã‚¡G ä½¿ç”¨æ•°*8
+	adda.l	d0,a1			//  a1.l = ãƒãƒƒãƒ•ã‚¡H å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
+	sub.l	a1,d6			//  d6.l = ãƒãƒƒãƒ•ã‚¡H ä½¿ç”¨æ•°*8
 
 					// ---------------------------------------
-					//  a0.l = ‘Š·—pƒoƒbƒtƒ@ŠÇ—\‘¢‘Ì
+					//  a0.l = æ›¸æ›ç”¨ãƒãƒƒãƒ•ã‚¡ç®¡ç†æ§‹é€ ä½“
 					// ---------------------------------------
-					//  a3.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@A Žg—p”*8
-					//  a4.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@C Žg—p”*8
-					//  a5.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@E Žg—p”*8
-					//  a6.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@G Žg—p”*8
+					//  a3.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡A ä½¿ç”¨æ•°*8
+					//  a4.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡C ä½¿ç”¨æ•°*8
+					//  a5.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡E ä½¿ç”¨æ•°*8
+					//  a6.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡G ä½¿ç”¨æ•°*8
 					// ---------------------------------------
-					//  d3.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@B Žg—p”*8
-					//  d4.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@D Žg—p”*8
-					//  d5.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@F Žg—p”*8
-					//  d6.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@H Žg—p”*8
+					//  d3.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡B ä½¿ç”¨æ•°*8
+					//  d4.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡D ä½¿ç”¨æ•°*8
+					//  d5.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡F ä½¿ç”¨æ•°*8
+					//  d6.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡H ä½¿ç”¨æ•°*8
 					// ---------------------------------------
 
-// -------[ ƒ‰ƒXƒ^•ªŠ„ Y À•W‚ÌŽ©“®XV ]
-	tst.w	auto_adjust_divy_flg	//  ƒ‰ƒXƒ^•ªŠ„ Y À•W‚ÌŽ©“®’²®‚ª—LŒø‚©H
-	beq	0f			//  NO ‚È‚ç bra
+// -------[ ãƒ©ã‚¹ã‚¿åˆ†å‰² Y åº§æ¨™ã®è‡ªå‹•æ›´æ–° ]
+	tst.w	auto_adjust_divy_flg	//  ãƒ©ã‚¹ã‚¿åˆ†å‰² Y åº§æ¨™ã®è‡ªå‹•èª¿æ•´ãŒæœ‰åŠ¹ã‹ï¼Ÿ
+	beq	0f			//  NO ãªã‚‰ bra
 		bsr AUTO_ADJUST_DIV_Y
 0:
 
 
-// -------[ Œ„ŠÔ‹l‚ßˆ— ]
+// -------[ éš™é–“è©°ã‚å‡¦ç† ]
 
 					// ---------------------------------------
-					//  a0.l = ‘Š·—pƒoƒbƒtƒ@ŠÇ—\‘¢‘Ì
+					//  a0.l = æ›¸æ›ç”¨ãƒãƒƒãƒ•ã‚¡ç®¡ç†æ§‹é€ ä½“
 					// ---------------------------------------
-					//  a3.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@A Žg—p”*8
-					//  a4.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@C Žg—p”*8
-					//  a5.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@E Žg—p”*8
-					//  a6.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@G Žg—p”*8
+					//  a3.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡A ä½¿ç”¨æ•°*8
+					//  a4.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡C ä½¿ç”¨æ•°*8
+					//  a5.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡E ä½¿ç”¨æ•°*8
+					//  a6.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡G ä½¿ç”¨æ•°*8
 					// ---------------------------------------
-					//  d3.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@B Žg—p”*8
-					//  d4.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@D Žg—p”*8
-					//  d5.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@F Žg—p”*8
-					//  d6.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@H Žg—p”*8
+					//  d3.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡B ä½¿ç”¨æ•°*8
+					//  d4.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡D ä½¿ç”¨æ•°*8
+					//  d5.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡F ä½¿ç”¨æ•°*8
+					//  d6.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡H ä½¿ç”¨æ•°*8
 					// ---------------------------------------
 
-	movea.l	div_buff(a0),a2		//  a2.l = ƒ‰ƒXƒ^•ªŠ„ƒoƒbƒtƒ@A æ“ªƒAƒhƒŒƒX
+	movea.l	div_buff(a0),a2		//  a2.l = ãƒ©ã‚¹ã‚¿åˆ†å‰²ãƒãƒƒãƒ•ã‚¡A å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 
 	lea.l	buff_A_total(pc),a1
 	move.w	#64*8,d7		//  d7.w = 64*8
 
 	cmp.w	(a1)+,d7
-	bge.b	0f					//  buff_X_total <= 64*8 ‚È‚ç bra
-		lea.l	CHAIN_OFS_div+65*8*0(a2),a0	//  a0.l = div_buff_X ƒ`ƒFƒCƒ“æ“ªƒAƒhƒŒƒX
+	bge.b	0f					//  buff_X_total <= 64*8 ãªã‚‰ bra
+		lea.l	CHAIN_OFS_div+65*8*0(a2),a0	//  a0.l = div_buff_X ãƒã‚§ã‚¤ãƒ³å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d1
-		add.l	a3,d1				//  d1.l = div_buff_X ƒ`ƒFƒCƒ“––’[ƒAƒhƒŒƒX
+		add.l	a3,d1				//  d1.l = div_buff_X ãƒã‚§ã‚¤ãƒ³æœ«ç«¯ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.w	d7,d0				//  d0.w = 64*8
-		sub.w	a3,d0				//  d0.w = 64*8 - (buff_X Žg—p”*8)
-							//       = [X]‹–—e”*8
-		bsr	CLEAR_SKIP			//  Œ„ŠÔ‹l‚ß
+		sub.w	a3,d0				//  d0.w = 64*8 - (buff_X ä½¿ç”¨æ•°*8)
+							//       = [X]è¨±å®¹æ•°*8
+		bsr	CLEAR_SKIP			//  éš™é–“è©°ã‚
 0:
 	cmp.w	(a1)+,d7
-	bge.b	0f					//  buff_X_total <= 64*8 ‚È‚ç bra
-		lea.l	CHAIN_OFS_div+65*8*1(a2),a0	//  a0.l = div_buff_X ƒ`ƒFƒCƒ“æ“ªƒAƒhƒŒƒX
+	bge.b	0f					//  buff_X_total <= 64*8 ãªã‚‰ bra
+		lea.l	CHAIN_OFS_div+65*8*1(a2),a0	//  a0.l = div_buff_X ãƒã‚§ã‚¤ãƒ³å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d1
-		add.l	d3,d1				//  d1.l = div_buff_X ƒ`ƒFƒCƒ“––’[ƒAƒhƒŒƒX
+		add.l	d3,d1				//  d1.l = div_buff_X ãƒã‚§ã‚¤ãƒ³æœ«ç«¯ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.w	d7,d0				//  d0.w = 64*8
-		sub.w	d3,d0				//  d0.w = 64*8 - (buff_X Žg—p”*8)
-							//       = [X]‹–—e”*8
-		bsr	CLEAR_SKIP			//  Œ„ŠÔ‹l‚ß
+		sub.w	d3,d0				//  d0.w = 64*8 - (buff_X ä½¿ç”¨æ•°*8)
+							//       = [X]è¨±å®¹æ•°*8
+		bsr	CLEAR_SKIP			//  éš™é–“è©°ã‚
 0:
 	cmp.w	(a1)+,d7
-	bge.b	0f					//  buff_X_total <= 64*8 ‚È‚ç bra
-		lea.l	CHAIN_OFS_div+65*8*2(a2),a0	//  a0.l = div_buff_X ƒ`ƒFƒCƒ“æ“ªƒAƒhƒŒƒX
+	bge.b	0f					//  buff_X_total <= 64*8 ãªã‚‰ bra
+		lea.l	CHAIN_OFS_div+65*8*2(a2),a0	//  a0.l = div_buff_X ãƒã‚§ã‚¤ãƒ³å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d1
-		add.l	a4,d1				//  d1.l = div_buff_X ƒ`ƒFƒCƒ“––’[ƒAƒhƒŒƒX
+		add.l	a4,d1				//  d1.l = div_buff_X ãƒã‚§ã‚¤ãƒ³æœ«ç«¯ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.w	d7,d0				//  d0.w = 64*8
-		sub.w	a4,d0				//  d0.w = 64*8 - (buff_X Žg—p”*8)
-							//       = [X]‹–—e”*8
-		bsr	CLEAR_SKIP			//  Œ„ŠÔ‹l‚ß
+		sub.w	a4,d0				//  d0.w = 64*8 - (buff_X ä½¿ç”¨æ•°*8)
+							//       = [X]è¨±å®¹æ•°*8
+		bsr	CLEAR_SKIP			//  éš™é–“è©°ã‚
 0:
 	cmp.w	(a1)+,d7
-	bge.b	0f					//  buff_X_total <= 64*8 ‚È‚ç bra
-		lea.l	CHAIN_OFS_div+65*8*3(a2),a0	//  a0.l = div_buff_X ƒ`ƒFƒCƒ“æ“ªƒAƒhƒŒƒX
+	bge.b	0f					//  buff_X_total <= 64*8 ãªã‚‰ bra
+		lea.l	CHAIN_OFS_div+65*8*3(a2),a0	//  a0.l = div_buff_X ãƒã‚§ã‚¤ãƒ³å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d1
-		add.l	d4,d1				//  d1.l = div_buff_X ƒ`ƒFƒCƒ“––’[ƒAƒhƒŒƒX
+		add.l	d4,d1				//  d1.l = div_buff_X ãƒã‚§ã‚¤ãƒ³æœ«ç«¯ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.w	d7,d0				//  d0.w = 64*8
-		sub.w	d4,d0				//  d0.w = 64*8 - (buff_X Žg—p”*8)
-							//       = [X]‹–—e”*8
-		bsr	CLEAR_SKIP			//  Œ„ŠÔ‹l‚ß
+		sub.w	d4,d0				//  d0.w = 64*8 - (buff_X ä½¿ç”¨æ•°*8)
+							//       = [X]è¨±å®¹æ•°*8
+		bsr	CLEAR_SKIP			//  éš™é–“è©°ã‚
 0:
 	cmp.w	(a1)+,d7
-	bge.b	0f					//  buff_X_total <= 64*8 ‚È‚ç bra
-		lea.l	CHAIN_OFS_div+65*8*4(a2),a0	//  a0.l = div_buff_X ƒ`ƒFƒCƒ“æ“ªƒAƒhƒŒƒX
+	bge.b	0f					//  buff_X_total <= 64*8 ãªã‚‰ bra
+		lea.l	CHAIN_OFS_div+65*8*4(a2),a0	//  a0.l = div_buff_X ãƒã‚§ã‚¤ãƒ³å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d1
-		add.l	a5,d1				//  d1.l = div_buff_X ƒ`ƒFƒCƒ“––’[ƒAƒhƒŒƒX
+		add.l	a5,d1				//  d1.l = div_buff_X ãƒã‚§ã‚¤ãƒ³æœ«ç«¯ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.w	d7,d0				//  d0.w = 64*8
-		sub.w	a5,d0				//  d0.w = 64*8 - (buff_X Žg—p”*8)
-							//       = [X]‹–—e”*8
-		bsr	CLEAR_SKIP			//  Œ„ŠÔ‹l‚ß
+		sub.w	a5,d0				//  d0.w = 64*8 - (buff_X ä½¿ç”¨æ•°*8)
+							//       = [X]è¨±å®¹æ•°*8
+		bsr	CLEAR_SKIP			//  éš™é–“è©°ã‚
 0:
 	cmp.w	(a1)+,d7
-	bge.b	0f					//  buff_X_total <= 64*8 ‚È‚ç bra
-		lea.l	CHAIN_OFS_div+65*8*5(a2),a0	//  a0.l = div_buff_X ƒ`ƒFƒCƒ“æ“ªƒAƒhƒŒƒX
+	bge.b	0f					//  buff_X_total <= 64*8 ãªã‚‰ bra
+		lea.l	CHAIN_OFS_div+65*8*5(a2),a0	//  a0.l = div_buff_X ãƒã‚§ã‚¤ãƒ³å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d1
-		add.l	d5,d1				//  d1.l = div_buff_X ƒ`ƒFƒCƒ“––’[ƒAƒhƒŒƒX
+		add.l	d5,d1				//  d1.l = div_buff_X ãƒã‚§ã‚¤ãƒ³æœ«ç«¯ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.w	d7,d0				//  d0.w = 64*8
-		sub.w	d5,d0				//  d0.w = 64*8 - (buff_X Žg—p”*8)
-							//       = [X]‹–—e”*8
-		bsr	CLEAR_SKIP			//  Œ„ŠÔ‹l‚ß
+		sub.w	d5,d0				//  d0.w = 64*8 - (buff_X ä½¿ç”¨æ•°*8)
+							//       = [X]è¨±å®¹æ•°*8
+		bsr	CLEAR_SKIP			//  éš™é–“è©°ã‚
 0:
 	cmp.w	(a1)+,d7
-	bge.b	0f					//  buff_X_total <= 64*8 ‚È‚ç bra
-		lea.l	CHAIN_OFS_div+65*8*6(a2),a0	//  a0.l = div_buff_X ƒ`ƒFƒCƒ“æ“ªƒAƒhƒŒƒX
+	bge.b	0f					//  buff_X_total <= 64*8 ãªã‚‰ bra
+		lea.l	CHAIN_OFS_div+65*8*6(a2),a0	//  a0.l = div_buff_X ãƒã‚§ã‚¤ãƒ³å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d1
-		add.l	a6,d1				//  d1.l = div_buff_X ƒ`ƒFƒCƒ“––’[ƒAƒhƒŒƒX
+		add.l	a6,d1				//  d1.l = div_buff_X ãƒã‚§ã‚¤ãƒ³æœ«ç«¯ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.w	d7,d0				//  d0.w = 64*8
-		sub.w	a6,d0				//  d0.w = 64*8 - (buff_X Žg—p”*8)
-							//       = [X]‹–—e”*8
-		bsr	CLEAR_SKIP			//  Œ„ŠÔ‹l‚ß
+		sub.w	a6,d0				//  d0.w = 64*8 - (buff_X ä½¿ç”¨æ•°*8)
+							//       = [X]è¨±å®¹æ•°*8
+		bsr	CLEAR_SKIP			//  éš™é–“è©°ã‚
 0:
 	cmp.w	(a1)+,d7
-	bge.b	0f					//  buff_X_total <= 64*8 ‚È‚ç bra
-		lea.l	CHAIN_OFS_div+65*8*7(a2),a0	//  a0.l = div_buff_X ƒ`ƒFƒCƒ“æ“ªƒAƒhƒŒƒX
+	bge.b	0f					//  buff_X_total <= 64*8 ãªã‚‰ bra
+		lea.l	CHAIN_OFS_div+65*8*7(a2),a0	//  a0.l = div_buff_X ãƒã‚§ã‚¤ãƒ³å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.l	a0,d1
-		add.l	d6,d1				//  d1.l = div_buff_X ƒ`ƒFƒCƒ“––’[ƒAƒhƒŒƒX
+		add.l	d6,d1				//  d1.l = div_buff_X ãƒã‚§ã‚¤ãƒ³æœ«ç«¯ã‚¢ãƒ‰ãƒ¬ã‚¹
 		move.w	d7,d0				//  d0.w = 64*8
-		sub.w	d6,d0				//  d0.w = 64*8 - (buff_X Žg—p”*8)
-							//       = [X]‹–—e”*8
-		bsr	CLEAR_SKIP			//  Œ„ŠÔ‹l‚ß
+		sub.w	d6,d0				//  d0.w = 64*8 - (buff_X ä½¿ç”¨æ•°*8)
+							//       = [X]è¨±å®¹æ•°*8
+		bsr	CLEAR_SKIP			//  éš™é–“è©°ã‚
 0:
 

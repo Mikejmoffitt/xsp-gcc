@@ -6,25 +6,25 @@
 
 _xsp_vsync:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
-	move.w	A7ID+arg1_w(sp),d0	//  d0.w = ni‹AüŠúŠÔ”j
+	move.w	A7ID+arg1_w(sp),d0	//  d0.w = nï¼ˆå¸°ç·šæœŸé–“æ•°ï¼‰
 
 
-// =====[ XSP ‘g‚İƒ`ƒFƒbƒN ]
-	btst.b	#0,XSP_flg(pc)		//  XSP ‚Í‘g‚İ‚Ü‚ê‚Ä‚¢‚é‚©Hibit0=1‚©Hj
-	bne.b	0f			//  YES ‚È‚ç bra
-		moveq	#-1,d0			//  XSP ‚ª‘g‚İ‚Ü‚ê‚Ä‚¢‚È‚¢‚Ì‚ÅA–ß‚è’l = -1
+// =====[ XSP çµ„è¾¼ã¿ãƒã‚§ãƒƒã‚¯ ]
+	btst.b	#0,XSP_flg(pc)		//  XSP ã¯çµ„ã¿è¾¼ã¾ã‚Œã¦ã„ã‚‹ã‹ï¼Ÿï¼ˆbit0=1ã‹ï¼Ÿï¼‰
+	bne.b	0f			//  YES ãªã‚‰ bra
+		moveq	#-1,d0			//  XSP ãŒçµ„ã¿è¾¼ã¾ã‚Œã¦ã„ãªã„ã®ã§ã€æˆ»ã‚Šå€¤ = -1
 		bra.b	xsp_vsync_rts
 0:
 
-// =====[ w’è VSYNC ’PˆÊ‚Ì‚’¼“¯Šú ]
+// =====[ æŒ‡å®š VSYNC å˜ä½ã®å‚ç›´åŒæœŸ ]
 xsp_vsync_wait_loop:
 	cmp.w	vsync_count(pc),d0
-	bhi.b	xsp_vsync_wait_loop	//  vsync_count < arg1i•„†–³‹j‚È‚çƒ‹[ƒv
+	bhi.b	xsp_vsync_wait_loop	//  vsync_count < arg1ï¼ˆç¬¦å·ç„¡è¦–ï¼‰ãªã‚‰ãƒ«ãƒ¼ãƒ—
 
-	move.w	vsync_count(pc),d0	//  d0.w = •Ô‚è’l
+	move.w	vsync_count(pc),d0	//  d0.w = è¿”ã‚Šå€¤
 	clr.w	vsync_count
 
 
@@ -42,26 +42,26 @@ xsp_vsync_rts:
 
 _xsp_vsync2:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
-	moveq	#0,d0			//  –ß‚è’l‰Šú’l = 0
+	moveq	#0,d0			//  æˆ»ã‚Šå€¤åˆæœŸå€¤ = 0
 
-// =====[ XSP ‘g‚İƒ`ƒFƒbƒN ]
-	btst.b	#0,XSP_flg(pc)		//  XSP ‚Í‘g‚İ‚Ü‚ê‚Ä‚¢‚é‚©Hibit0=1‚©Hj
-	bne.b	0f			//  YES ‚È‚ç bra
-		moveq	#-1,d0			//  XSP ‚ª‘g‚İ‚Ü‚ê‚Ä‚¢‚È‚¢‚Ì‚ÅA–ß‚è’l = -1
+// =====[ XSP çµ„è¾¼ã¿ãƒã‚§ãƒƒã‚¯ ]
+	btst.b	#0,XSP_flg(pc)		//  XSP ã¯çµ„ã¿è¾¼ã¾ã‚Œã¦ã„ã‚‹ã‹ï¼Ÿï¼ˆbit0=1ã‹ï¼Ÿï¼‰
+	bne.b	0f			//  YES ãªã‚‰ bra
+		moveq	#-1,d0			//  XSP ãŒçµ„ã¿è¾¼ã¾ã‚Œã¦ã„ãªã„ã®ã§ã€æˆ»ã‚Šå€¤ = -1
 		bra.b	xsp_vsync2_rts
 0:
 
-// =====[ •Û—¯ó‘Ô‚Ì•\¦ƒŠƒNƒGƒXƒg‚ª—­‚Ü‚è‚·‚¬‚é‚È‚ç‘Ò‚Â ]
-	move.w	A7ID+arg1_w(sp),d1	//  d1.w = max_delayi‹–—e’x‰„ƒtƒŒ[ƒ€”j
+// =====[ ä¿ç•™çŠ¶æ…‹ã®è¡¨ç¤ºãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒæºœã¾ã‚Šã™ãã‚‹ãªã‚‰å¾…ã¤ ]
+	move.w	A7ID+arg1_w(sp),d1	//  d1.w = max_delayï¼ˆè¨±å®¹é…å»¶ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ï¼‰
 
 xsp_vsync2_wait_loop:
 	cmp.w	penging_disp_count(pc),d1	//
-	bcc.b	xsp_vsync2_rts			//  penging_disp_count <= d1i•„†–³‹j‚È‚ç”²‚¯‚é
-		moveq	#1,d0			//  –ß‚è’l = 1iƒuƒƒbƒLƒ“ƒO‚µ‚½‚±‚Æ‚ğ¦‚·j
-		bra.b	xsp_vsync2_wait_loop	//  ƒŠƒgƒ‰ƒC
+	bcc.b	xsp_vsync2_rts			//  penging_disp_count <= d1ï¼ˆç¬¦å·ç„¡è¦–ï¼‰ãªã‚‰æŠœã‘ã‚‹
+		moveq	#1,d0			//  æˆ»ã‚Šå€¤ = 1ï¼ˆãƒ–ãƒ­ãƒƒã‚­ãƒ³ã‚°ã—ãŸã“ã¨ã‚’ç¤ºã™ï¼‰
+		bra.b	xsp_vsync2_wait_loop	//  ãƒªãƒˆãƒ©ã‚¤
 
 xsp_vsync2_rts:
 	rts
@@ -77,8 +77,8 @@ xsp_vsync2_rts:
 
 _xsp_objdat_set:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.l	A7ID+arg1_l(sp),sp_ref_adr
 
@@ -95,41 +95,41 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 
 _xsp_pcgdat_set:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	movea.l	A7ID+arg1_l(sp),a0	//  a0.l = *PCG_DAT
 	movea.l	A7ID+arg2_l(sp),a1	//  a1.l = *PCG_ALT
-	move.w	A7ID+arg3_w(sp),d0	//  d0.w =  PCG_ALT ƒTƒCƒY
+	move.w	A7ID+arg3_w(sp),d0	//  d0.w =  PCG_ALT ã‚µã‚¤ã‚º
 
-// -------[ ‚Ü‚¸‘O‰ñ‚Ü‚Å‚Ì‹AüŠúŠÔ PCG ’è‹`‚ªI—¹‚·‚é‚Ü‚Å WAIT ]
+// -------[ ã¾ãšå‰å›ã¾ã§ã®å¸°ç·šæœŸé–“ PCG å®šç¾©ãŒçµ‚äº†ã™ã‚‹ã¾ã§ WAIT ]
 	clr.w	vsync_count
-	movem.l	d0-d2/a0-a2,-(sp)	//  ƒŒƒWƒXƒ^‘Ş”ğ
-	move.l	#3,-(sp)		//  ˆø”‚ğ PUSH
+	movem.l	d0-d2/a0-a2,-(sp)	//  ãƒ¬ã‚¸ã‚¹ã‚¿é€€é¿
+	move.l	#3,-(sp)		//  å¼•æ•°ã‚’ PUSH
 	bsr	_xsp_vsync		//  3 vsync WAIT
-	lea	4(sp),sp		//  ƒXƒ^ƒbƒN•â³
-	movem.l	(sp)+,d0-d2/a0-a2	//  ƒŒƒWƒXƒ^•œŠˆ
+	lea	4(sp),sp		//  ã‚¹ã‚¿ãƒƒã‚¯è£œæ­£
+	movem.l	(sp)+,d0-d2/a0-a2	//  ãƒ¬ã‚¸ã‚¹ã‚¿å¾©æ´»
 
-// -------[ Šeíƒ†[ƒU[w’èƒAƒhƒŒƒX‘‚İ ]
+// -------[ å„ç¨®ãƒ¦ãƒ¼ã‚¶ãƒ¼æŒ‡å®šã‚¢ãƒ‰ãƒ¬ã‚¹æ›¸è¾¼ã¿ ]
 	move.l	a0,pcg_dat_adr
-	addq.w	#1,a1			//  ”z’uŠÇ—ƒe[ƒuƒ‹‚Ìæ“ª 1 ƒoƒCƒg‚Í”ò‚Î‚·
+	addq.w	#1,a1			//  é…ç½®ç®¡ç†ãƒ†ãƒ¼ãƒ–ãƒ«ã®å…ˆé ­ 1 ãƒã‚¤ãƒˆã¯é£›ã°ã™
 	move.l	a1,pcg_alt_adr
 
-// -------[ PCG_ALT ‰Šú‰» ]
+// -------[ PCG_ALT åˆæœŸåŒ– ]
 					//  a1.l = pcg_alt_adr
-					//  d0.w = ƒNƒŠƒA” +1
-	subq.w	#2,d0			//  dbra ƒJƒEƒ“ƒ^‚Æ‚·‚é‚½‚ß•â³
+					//  d0.w = ã‚¯ãƒªã‚¢æ•° +1
+	subq.w	#2,d0			//  dbra ã‚«ã‚¦ãƒ³ã‚¿ã¨ã™ã‚‹ãŸã‚è£œæ­£
 0:		clr.b	(a1)+
 		dbra	d0,0b
 
-// -------[ PCG_REV_ALT ‰Šú‰» ]
+// -------[ PCG_REV_ALT åˆæœŸåŒ– ]
 	lea	pcg_rev_alt_no_pc,a1
-	move.w	#255,d0			//  256.w ƒNƒŠƒA‚·‚é‚½‚ß‚Ì dbra ƒJƒEƒ“ƒ^
+	move.w	#255,d0			//  256.w ã‚¯ãƒªã‚¢ã™ã‚‹ãŸã‚ã® dbra ã‚«ã‚¦ãƒ³ã‚¿
 0:		move.w	#-1,(a1)+
 		dbra	d0,0b
 
-// -------[ XSP “à•”ƒtƒ‰ƒOˆ— ]
-	bset.b	#1,XSP_flg		//  PCG_DAT, PCG_ALT ‚ªw’èÏ‚ğ¦‚·ƒtƒ‰ƒO‚ğƒZƒbƒg
+// -------[ XSP å†…éƒ¨ãƒ•ãƒ©ã‚°å‡¦ç† ]
+	bset.b	#1,XSP_flg		//  PCG_DAT, PCG_ALT ãŒæŒ‡å®šæ¸ˆã‚’ç¤ºã™ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
 
 	rts
 
@@ -144,42 +144,42 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 
 _xsp_pcgmask_on:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
-	move.w	A7ID+arg1_w(sp),d0	//  d0.w = ƒ}ƒXƒNİ’èŠJnƒiƒ“ƒo[
-	move.w	A7ID+arg2_w(sp),d1	//  d1.w = ƒ}ƒXƒNİ’èI—¹ƒiƒ“ƒo[
+	move.w	A7ID+arg1_w(sp),d0	//  d0.w = ãƒã‚¹ã‚¯è¨­å®šé–‹å§‹ãƒŠãƒ³ãƒãƒ¼
+	move.w	A7ID+arg2_w(sp),d1	//  d1.w = ãƒã‚¹ã‚¯è¨­å®šçµ‚äº†ãƒŠãƒ³ãƒãƒ¼
 
-// -------[ dbra ƒJƒEƒ“ƒ^‰Šú’lİ’è ]
+// -------[ dbra ã‚«ã‚¦ãƒ³ã‚¿åˆæœŸå€¤è¨­å®š ]
 	cmpi.w	#256,d0
-	bcc.b	xsp_mask_on_ERR		//  #256 <= d1.wi•„†–³‹j‚È‚ç bra
+	bcc.b	xsp_mask_on_ERR		//  #256 <= d1.wï¼ˆç¬¦å·ç„¡è¦–ï¼‰ãªã‚‰ bra
 
 	cmpi.w	#256,d1
-	bcc.b	xsp_mask_on_ERR		//  #256 <= d1.wi•„†–³‹j‚È‚ç bra
+	bcc.b	xsp_mask_on_ERR		//  #256 <= d1.wï¼ˆç¬¦å·ç„¡è¦–ï¼‰ãªã‚‰ bra
 
 	tst.w	d0
 	bne.b	0f
-		addq.w	#1,d0		//  ƒ}ƒXƒNİ’èŠJnƒiƒ“ƒo[‚ª 0 ‚È‚Ì‚ÅA‹­§“I‚É 1 ‚É‚·‚éB
+		addq.w	#1,d0		//  ãƒã‚¹ã‚¯è¨­å®šé–‹å§‹ãƒŠãƒ³ãƒãƒ¼ãŒ 0 ãªã®ã§ã€å¼·åˆ¶çš„ã« 1 ã«ã™ã‚‹ã€‚
 0:
 
 	sub.w	d0,d1			//  d1.w -= d0.w
-	bmi.b	xsp_mask_on_ERR		//  dbra ƒJƒEƒ“ƒ^ < 0 ‚È‚ç bra
+	bmi.b	xsp_mask_on_ERR		//  dbra ã‚«ã‚¦ãƒ³ã‚¿ < 0 ãªã‚‰ bra
 
-	lea.l	OX_mask_no_pc,a0	//  a0.l = OX_mask ƒgƒbƒvƒAƒhƒŒƒX
-	adda.w	d0,a0			//  a0.l = OX_mask QÆŠJnƒAƒhƒŒƒX
+	lea.l	OX_mask_no_pc,a0	//  a0.l = OX_mask ãƒˆãƒƒãƒ—ã‚¢ãƒ‰ãƒ¬ã‚¹
+	adda.w	d0,a0			//  a0.l = OX_mask å‚ç…§é–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹
 
-// -------[ ƒ}ƒXƒN‰ÁH ]
-	moveq.l	#255,d0			//  d0.b = 255iƒ}ƒXƒNonj
+// -------[ ãƒã‚¹ã‚¯åŠ å·¥ ]
+	moveq	#-1,d0			//  d0.b = 255ï¼ˆãƒã‚¹ã‚¯onï¼‰
 
-0:	move.b	d0,(a0)+		//  ƒ}ƒXƒNİ’è
-	dbra	d1,0b			//  w’è”ˆ—‚·‚é‚Ü‚Åƒ‹[ƒv
+0:	move.b	d0,(a0)+		//  ãƒã‚¹ã‚¯è¨­å®š
+	dbra	d1,0b			//  æŒ‡å®šæ•°å‡¦ç†ã™ã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
 
-	move.w	#1,OX_mask_renew	//  OX_mask ‚ÉXV‚ª‚ ‚Á‚½‚±‚Æ‚ğ“`‚¦‚é
+	move.w	#1,OX_mask_renew	//  OX_mask ã«æ›´æ–°ãŒã‚ã£ãŸã“ã¨ã‚’ä¼ãˆã‚‹
 
-// -------[ ³íI—¹ ]
+// -------[ æ­£å¸¸çµ‚äº† ]
 	rts
 
-// -------[ ˆø”‚ª•s³‚È‚Ì‚Å‹­§I—¹ ]
+// -------[ å¼•æ•°ãŒä¸æ­£ãªã®ã§å¼·åˆ¶çµ‚äº† ]
 xsp_mask_on_ERR:
 	rts
 
@@ -194,42 +194,42 @@ xsp_mask_on_ERR:
 
 _xsp_pcgmask_off:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
-	move.w	A7ID+arg1_w(sp),d0	//  d0.w = ƒ}ƒXƒNİ’èŠJnƒiƒ“ƒo[
-	move.w	A7ID+arg2_w(sp),d1	//  d1.w = ƒ}ƒXƒNİ’èI—¹ƒiƒ“ƒo[
+	move.w	A7ID+arg1_w(sp),d0	//  d0.w = ãƒã‚¹ã‚¯è¨­å®šé–‹å§‹ãƒŠãƒ³ãƒãƒ¼
+	move.w	A7ID+arg2_w(sp),d1	//  d1.w = ãƒã‚¹ã‚¯è¨­å®šçµ‚äº†ãƒŠãƒ³ãƒãƒ¼
 
-// -------[ dbra ƒJƒEƒ“ƒ^‰Šú’lİ’è ]
+// -------[ dbra ã‚«ã‚¦ãƒ³ã‚¿åˆæœŸå€¤è¨­å®š ]
 	cmpi.w	#256,d0
-	bcc.b	xsp_mask_off_ERR	//  #256 <= d1.wi•„†–³‹j‚È‚ç bra
+	bcc.b	xsp_mask_off_ERR	//  #256 <= d1.wï¼ˆç¬¦å·ç„¡è¦–ï¼‰ãªã‚‰ bra
 
 	cmpi.w	#256,d1
-	bcc.b	xsp_mask_off_ERR	//  #256 <= d1.wi•„†–³‹j‚È‚ç bra
+	bcc.b	xsp_mask_off_ERR	//  #256 <= d1.wï¼ˆç¬¦å·ç„¡è¦–ï¼‰ãªã‚‰ bra
 
 	tst.w	d0
 	bne.b	0f
-		addq.w	#1,d0		//  ƒ}ƒXƒNİ’èŠJnƒiƒ“ƒo[‚ª 0 ‚È‚Ì‚ÅA‹­§“I‚É 1 ‚É‚·‚éB
+		addq.w	#1,d0		//  ãƒã‚¹ã‚¯è¨­å®šé–‹å§‹ãƒŠãƒ³ãƒãƒ¼ãŒ 0 ãªã®ã§ã€å¼·åˆ¶çš„ã« 1 ã«ã™ã‚‹ã€‚
 0:
 
 	sub.w	d0,d1			//  d1.w -= d0.w
-	bmi.b	xsp_mask_off_ERR	//  dbra ƒJƒEƒ“ƒ^ < 0 ‚È‚ç bra
+	bmi.b	xsp_mask_off_ERR	//  dbra ã‚«ã‚¦ãƒ³ã‚¿ < 0 ãªã‚‰ bra
 
-	lea.l	OX_mask_no_pc,a0	//  a0.l = OX_mask ƒgƒbƒvƒAƒhƒŒƒX
-	adda.w	d0,a0			//  a0.l = OX_mask QÆŠJnƒAƒhƒŒƒX
+	lea.l	OX_mask_no_pc,a0	//  a0.l = OX_mask ãƒˆãƒƒãƒ—ã‚¢ãƒ‰ãƒ¬ã‚¹
+	adda.w	d0,a0			//  a0.l = OX_mask å‚ç…§é–‹å§‹ã‚¢ãƒ‰ãƒ¬ã‚¹
 
-// -------[ ƒ}ƒXƒN‰ÁH ]
-	moveq.l	#0,d0			//  d0.b = 0iƒ}ƒXƒNoffj
+// -------[ ãƒã‚¹ã‚¯åŠ å·¥ ]
+	moveq.l	#0,d0			//  d0.b = 0ï¼ˆãƒã‚¹ã‚¯offï¼‰
 
-0:	move.b	d0,(a0)+		//  ƒ}ƒXƒNİ’è
-	dbra	d1,0b			//  w’è”ˆ—‚·‚é‚Ü‚Åƒ‹[ƒv
+0:	move.b	d0,(a0)+		//  ãƒã‚¹ã‚¯è¨­å®š
+	dbra	d1,0b			//  æŒ‡å®šæ•°å‡¦ç†ã™ã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
 
-	move.w	#1,OX_mask_renew	//  OX_mask ‚ÉXV‚ª‚ ‚Á‚½‚±‚Æ‚ğ“`‚¦‚é
+	move.w	#1,OX_mask_renew	//  OX_mask ã«æ›´æ–°ãŒã‚ã£ãŸã“ã¨ã‚’ä¼ãˆã‚‹
 
-// -------[ ³íI—¹ ]
+// -------[ æ­£å¸¸çµ‚äº† ]
 	rts
 
-// -------[ ˆø”‚ª•s³‚È‚Ì‚Å‹­§I—¹ ]
+// -------[ å¼•æ•°ãŒä¸æ­£ãªã®ã§å¼·åˆ¶çµ‚äº† ]
 xsp_mask_off_ERR:
 	rts
 
@@ -244,18 +244,18 @@ xsp_mask_off_ERR:
 
 _xsp_mode:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	A7ID+arg1_w(sp),d0	//  d0.w = MODE_No.
 
-// -------[ –³Œø‚È’l‚Ìê‡A3 ‚ªw’è‚³‚ê‚½‚à‚Ì‚Æ‚·‚é ]
+// -------[ ç„¡åŠ¹ãªå€¤ã®å ´åˆã€3 ãŒæŒ‡å®šã•ã‚ŒãŸã‚‚ã®ã¨ã™ã‚‹ ]
 	tst.w	d0
 	bne.b	0f
 		moveq.l	#3,d0
 0:
 	cmpi.w	#3,d0
-	bls.b	0f			//  3 >= d0.w ‚È‚ç bra
+	bls.b	0f			//  3 >= d0.w ãªã‚‰ bra
 		moveq.l	#3,d0
 0:
 
@@ -273,8 +273,8 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 
 _xsp_vertical:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	A7ID+arg1_w(sp),vertical_flg
 	rts
@@ -290,72 +290,72 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 
 _xsp_on:
 
-A7ID	=	4+15*4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 15*4 byte ]
-	movem.l	d0-d7/a0-a6,-(sp)	//  ƒŒƒWƒXƒ^‘Ş”ğ
+A7ID	=	4+15*4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 15*4 byte ]
+	movem.l	d0-d7/a0-a6,-(sp)	//  ãƒ¬ã‚¸ã‚¹ã‚¿é€€é¿
 
 
-// =====[ XSP ‘g‚İ‚İƒ`ƒFƒbƒN ]
-	bset.b	#0,XSP_flg		//  ‘g‚İ‚İó‘Ô‚©Hiƒ`ƒFƒbƒN‚Æ“¯‚Éƒtƒ‰ƒOƒZƒbƒgj
-	beq.b	0f			//  0(=NO) ‚È‚ç‘g‚İˆ—‚Ö bra
-		bra	xsp_on_rts	//  Šù‚É‘g‚İ‚Ü‚ê‚Ä‚¢‚é‚Ì‚ÅA‹¤’ÊI—¹ˆ—‚Ö
+// =====[ XSP çµ„ã¿è¾¼ã¿ãƒã‚§ãƒƒã‚¯ ]
+	bset.b	#0,XSP_flg		//  çµ„ã¿è¾¼ã¿çŠ¶æ…‹ã‹ï¼Ÿï¼ˆãƒã‚§ãƒƒã‚¯ã¨åŒæ™‚ã«ãƒ•ãƒ©ã‚°ã‚»ãƒƒãƒˆï¼‰
+	beq.b	0f			//  0(=NO) ãªã‚‰çµ„è¾¼ã¿å‡¦ç†ã¸ bra
+		bra	xsp_on_rts	//  æ—¢ã«çµ„ã¿è¾¼ã¾ã‚Œã¦ã„ã‚‹ã®ã§ã€å…±é€šçµ‚äº†å‡¦ç†ã¸
 0:
 
-// =====[ ƒoƒbƒtƒ@‰Šú‰» ]
-	bsr	XSP_BUFF_INIT		//  ‘S“à•”ƒoƒbƒtƒ@‰Šú‰»i‹AüŠúŠÔ“]‘—ƒoƒbƒtƒ@‚Íœ‚­j
+// =====[ ãƒãƒƒãƒ•ã‚¡åˆæœŸåŒ– ]
+	bsr	XSP_BUFF_INIT		//  å…¨å†…éƒ¨ãƒãƒƒãƒ•ã‚¡åˆæœŸåŒ–ï¼ˆå¸°ç·šæœŸé–“è»¢é€ãƒãƒƒãƒ•ã‚¡ã¯é™¤ãï¼‰
 
-// =====[ ƒX[ƒp[ƒoƒCƒU[ƒ‚[ƒh‚Ö ]
+// =====[ ã‚¹ãƒ¼ãƒ‘ãƒ¼ãƒã‚¤ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã¸ ]
 	suba.l	a1,a1
-	iocs	_B_SUPER		//  ƒX[ƒp[ƒoƒCƒU[ƒ‚[ƒh‚Ö
-	move.l	d0,usp_bak		// i‚à‚Æ‚à‚ÆƒX[ƒp[ƒoƒCƒU[ƒ‚[ƒh‚È‚ç d0.l=-1j
+	iocs	_B_SUPER		//  ã‚¹ãƒ¼ãƒ‘ãƒ¼ãƒã‚¤ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã¸
+	move.l	d0,usp_bak		// ï¼ˆã‚‚ã¨ã‚‚ã¨ã‚¹ãƒ¼ãƒ‘ãƒ¼ãƒã‚¤ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ãªã‚‰ d0.l=-1ï¼‰
 
 
-// =====[ XSP ‘g‚İˆ— ]
-	ori.w	#0x0700,sr		//  Š„‚è‚İ off
-	bsr	WAIT			//  68030 ‘Îô
+// =====[ XSP çµ„è¾¼ã¿å‡¦ç† ]
+	ori.w	#0x0700,sr		//  å‰²ã‚Šè¾¼ã¿ off
+	bsr	WAIT			//  68030 å¯¾ç­–
 
-// -------[ MFP ‚ÌƒoƒbƒNƒAƒbƒv‚ğæ‚é ]
-	movea.l	#0xe88000,a0		//  a0.l = MFPƒAƒhƒŒƒX
-	lea.l	MFP_bak(pc),a1		//  a1.l = MFP•Û‘¶æƒAƒhƒŒƒX
+// -------[ MFP ã®ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã‚’å–ã‚‹ ]
+	movea.l	#0xe88000,a0		//  a0.l = MFPã‚¢ãƒ‰ãƒ¬ã‚¹
+	lea.l	MFP_bak(pc),a1		//  a1.l = MFPä¿å­˜å…ˆã‚¢ãƒ‰ãƒ¬ã‚¹
 
-	move.b	AER(a0),AER(a1)		//   AER •Û‘¶
-	move.b	IERA(a0),IERA(a1)	//  IERA •Û‘¶
-	move.b	IERB(a0),IERB(a1)	//  IERB •Û‘¶
-	move.b	IMRA(a0),IMRA(a1)	//  IMRA •Û‘¶
-	move.b	IMRB(a0),IMRB(a1)	//  IMRB •Û‘¶
+	move.b	AER(a0),AER(a1)		//   AER ä¿å­˜
+	move.b	IERA(a0),IERA(a1)	//  IERA ä¿å­˜
+	move.b	IERB(a0),IERB(a1)	//  IERB ä¿å­˜
+	move.b	IMRA(a0),IMRA(a1)	//  IMRA ä¿å­˜
+	move.b	IMRB(a0),IMRB(a1)	//  IMRB ä¿å­˜
 
-	move.l	0x118,vector_118_bak	//  •ÏX‘O‚Ì V-disp ƒxƒNƒ^
-	move.l	0x138,vector_138_bak	//  •ÏX‘O‚Ì CRT-IRQ ƒxƒNƒ^
-	move.w	0xE80012,raster_No_bak	//  •ÏX‘O‚Ì CRT-IRQ ƒ‰ƒXƒ^ No.
+	move.l	0x118,vector_118_bak	//  å¤‰æ›´å‰ã® V-disp ãƒ™ã‚¯ã‚¿
+	move.l	0x138,vector_138_bak	//  å¤‰æ›´å‰ã® CRT-IRQ ãƒ™ã‚¯ã‚¿
+	move.w	0xE80012,raster_No_bak	//  å¤‰æ›´å‰ã® CRT-IRQ ãƒ©ã‚¹ã‚¿ No.
 
-// -------[ V-DISP Š„‚è‚İİ’è ]
-	move.l	#VSYNC_INT,0x118		//  V-disp ƒxƒNƒ^‘Š·‚¦
-	bclr.b	#4,AER(a0)		//  ‹AüŠúŠÔ‚Æ“¯‚ÉŠ„‚è‚Ş
-	bset.b	#6,IMRB(a0)		//  ƒ}ƒXƒN‚ğ‚Í‚ª‚·
-	bset.b	#6,IERB(a0)		//  Š„‚è‚İ‹–‰Â
+// -------[ V-DISP å‰²ã‚Šè¾¼ã¿è¨­å®š ]
+	move.l	#VSYNC_INT,0x118		//  V-disp ãƒ™ã‚¯ã‚¿æ›¸æ›ãˆ
+	bclr.b	#4,AER(a0)		//  å¸°ç·šæœŸé–“ã¨åŒæ™‚ã«å‰²ã‚Šè¾¼ã‚€
+	bset.b	#6,IMRB(a0)		//  ãƒã‚¹ã‚¯ã‚’ã¯ãŒã™
+	bset.b	#6,IERB(a0)		//  å‰²ã‚Šè¾¼ã¿è¨±å¯
 
-// -------[ H-SYNC Š„‚è‚İİ’è ]
-	move.w	#1023,0xE80012		//  Š„‚è‚İƒ‰ƒXƒ^ƒiƒ“ƒo[i‚Ü‚¾Š„‚è‚İ offj
-	move.l	#RAS_INT,0x138		//  CRT-IRQ ƒxƒNƒ^‘Š·‚¦
-	bclr.b	#6,AER(a0)		//  Š„‚è‚İ—v‹‚Æ“¯‚ÉŠ„‚è‚Ş
-	bset.b	#6,IMRA(a0)		//  ƒ}ƒXƒN‚ğ‚Í‚ª‚·
-	bset.b	#6,IERA(a0)		//  Š„‚è‚İ‹–‰Â
+// -------[ H-SYNC å‰²ã‚Šè¾¼ã¿è¨­å®š ]
+	move.w	#1023,0xE80012		//  å‰²ã‚Šè¾¼ã¿ãƒ©ã‚¹ã‚¿ãƒŠãƒ³ãƒãƒ¼ï¼ˆã¾ã å‰²ã‚Šè¾¼ã¿ offï¼‰
+	move.l	#RAS_INT,0x138		//  CRT-IRQ ãƒ™ã‚¯ã‚¿æ›¸æ›ãˆ
+	bclr.b	#6,AER(a0)		//  å‰²ã‚Šè¾¼ã¿è¦æ±‚ã¨åŒæ™‚ã«å‰²ã‚Šè¾¼ã‚€
+	bset.b	#6,IMRA(a0)		//  ãƒã‚¹ã‚¯ã‚’ã¯ãŒã™
+	bset.b	#6,IERA(a0)		//  å‰²ã‚Šè¾¼ã¿è¨±å¯
 
 // ------------------------------
-	bsr	WAIT			//  68030 ‘Îô
-	andi.w	#0xf8ff,sr		//  Š„‚è‚İ on
+	bsr	WAIT			//  68030 å¯¾ç­–
+	andi.w	#0xf8ff,sr		//  å‰²ã‚Šè¾¼ã¿ on
 
 
-// =====[ ƒ†[ƒU[ƒ‚[ƒh‚Ö ]
+// =====[ ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã¸ ]
 	move.l	usp_bak(pc),d0
-	bmi.b	0f			//  ƒX[ƒp[ƒoƒCƒU[ƒ‚[ƒh‚©‚çÀs‚³‚ê‚Ä‚¢‚½‚ç–ß‚·•K—v–³‚µ
+	bmi.b	0f			//  ã‚¹ãƒ¼ãƒ‘ãƒ¼ãƒã‚¤ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã‹ã‚‰å®Ÿè¡Œã•ã‚Œã¦ã„ãŸã‚‰æˆ»ã™å¿…è¦ç„¡ã—
 		movea.l	d0,a1
-		iocs	_B_SUPER	//  ƒ†[ƒU[ƒ‚[ƒh‚Ö
+		iocs	_B_SUPER	//  ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã¸
 0:
 
-// -------[ I—¹ ]
+// -------[ çµ‚äº† ]
 xsp_on_rts:
-	movem.l	(sp)+,d0-d7/a0-a6	//  ƒŒƒWƒXƒ^•œŠˆ
+	movem.l	(sp)+,d0-d7/a0-a6	//  ãƒ¬ã‚¸ã‚¹ã‚¿å¾©æ´»
 	rts
 
 
@@ -369,76 +369,76 @@ xsp_on_rts:
 
 _xsp_off:
 
-A7ID	=	4+15*4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 15*4 byte ]
-	movem.l	d0-d7/a0-a6,-(sp)	//  ƒŒƒWƒXƒ^‘Ş”ğ
+A7ID	=	4+15*4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 15*4 byte ]
+	movem.l	d0-d7/a0-a6,-(sp)	//  ãƒ¬ã‚¸ã‚¹ã‚¿é€€é¿
 
 
-// =====[ XSP ‘g‚İ‚İƒ`ƒFƒbƒN ]
-	bclr.b	#0,XSP_flg		//  ‘g‚İ‚İó‘Ô‚©Hiƒ`ƒFƒbƒN‚Æ“¯‚Éƒtƒ‰ƒOƒNƒŠƒAj
-	bne.b	0f			//  1(=YES) ‚È‚ç‘g‚İ‰ğœˆ—‚Ö bra
-		bra	xsp_off_rts	//  ‚à‚Æ‚à‚Æ‘g‚İ‚Ü‚ê‚Ä‚¢‚È‚¢‚Ì‚ÅA‹¤’ÊI—¹ˆ—‚Ö
+// =====[ XSP çµ„ã¿è¾¼ã¿ãƒã‚§ãƒƒã‚¯ ]
+	bclr.b	#0,XSP_flg		//  çµ„ã¿è¾¼ã¿çŠ¶æ…‹ã‹ï¼Ÿï¼ˆãƒã‚§ãƒƒã‚¯ã¨åŒæ™‚ã«ãƒ•ãƒ©ã‚°ã‚¯ãƒªã‚¢ï¼‰
+	bne.b	0f			//  1(=YES) ãªã‚‰çµ„è¾¼ã¿è§£é™¤å‡¦ç†ã¸ bra
+		bra	xsp_off_rts	//  ã‚‚ã¨ã‚‚ã¨çµ„ã¿è¾¼ã¾ã‚Œã¦ã„ãªã„ã®ã§ã€å…±é€šçµ‚äº†å‡¦ç†ã¸
 0:
 
 
-// =====[ ƒX[ƒp[ƒoƒCƒU[ƒ‚[ƒh‚Ö ]
+// =====[ ã‚¹ãƒ¼ãƒ‘ãƒ¼ãƒã‚¤ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã¸ ]
 	suba.l	a1,a1
-	iocs	_B_SUPER		//  ƒX[ƒp[ƒoƒCƒU[ƒ‚[ƒh‚Ö
-	move.l	d0,usp_bak		// i‚à‚Æ‚à‚ÆƒX[ƒp[ƒoƒCƒU[ƒ‚[ƒh‚È‚ç d0.l=-1j
+	iocs	_B_SUPER		//  ã‚¹ãƒ¼ãƒ‘ãƒ¼ãƒã‚¤ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã¸
+	move.l	d0,usp_bak		// ï¼ˆã‚‚ã¨ã‚‚ã¨ã‚¹ãƒ¼ãƒ‘ãƒ¼ãƒã‚¤ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ãªã‚‰ d0.l=-1ï¼‰
 
 
-// =====[ XSP ‘g‚İ‰ğœˆ— ]
-	ori.w	#0x0700,sr		//  Š„‚è‚İ off
-	bsr	WAIT			//  68030 ‘Îô
+// =====[ XSP çµ„è¾¼ã¿è§£é™¤å‡¦ç† ]
+	ori.w	#0x0700,sr		//  å‰²ã‚Šè¾¼ã¿ off
+	bsr	WAIT			//  68030 å¯¾ç­–
 
-// -------[ MFP ‚Ì•œŠˆ ]
-	movea.l	#0xe88000,a0		//  a0.l = MFPƒAƒhƒŒƒX
-	lea.l	MFP_bak(pc),a1		//  a1.l = MFP‚ğ•Û‘¶‚µ‚Ä‚¨‚¢‚½ƒAƒhƒŒƒX
+// -------[ MFP ã®å¾©æ´» ]
+	movea.l	#0xe88000,a0		//  a0.l = MFPã‚¢ãƒ‰ãƒ¬ã‚¹
+	lea.l	MFP_bak(pc),a1		//  a1.l = MFPã‚’ä¿å­˜ã—ã¦ãŠã„ãŸã‚¢ãƒ‰ãƒ¬ã‚¹
 
 	move.b	AER(a1),d0
-	andi.b	#%0101_0000,d0
-	andi.b	#%1010_1111,AER(a0)
-	or.b	d0,AER(a0)		//  AER bit4&6 •œŠˆ
+	andi.b	#0b01010000,d0
+	andi.b	#0b10101111,AER(a0)
+	or.b	d0,AER(a0)		//  AER bit4&6 å¾©æ´»
 
 	move.b	IERA(a1),d0
-	andi.b	#%0100_0000,d0
-	andi.b	#%1011_1111,IERA(a0)
-	or.b	d0,IERA(a0)		//  IERA bit6 •œŠˆ
+	andi.b	#0b01000000,d0
+	andi.b	#0b10111111,IERA(a0)
+	or.b	d0,IERA(a0)		//  IERA bit6 å¾©æ´»
 
 	move.b	IERB(a1),d0
-	andi.b	#%0100_0000,d0
-	andi.b	#%1011_1111,IERB(a0)
-	or.b	d0,IERB(a0)		//  IERB bit6 •œŠˆ
+	andi.b	#0b01000000,d0
+	andi.b	#0b10111111,IERB(a0)
+	or.b	d0,IERB(a0)		//  IERB bit6 å¾©æ´»
 
 	move.b	IMRA(a1),d0
-	andi.b	#%0100_0000,d0
-	andi.b	#%1011_1111,IMRA(a0)
-	or.b	d0,IMRA(a0)		//  IMRA bit6 •œŠˆ
+	andi.b	#0b01000000,d0
+	andi.b	#0b10111111,IMRA(a0)
+	or.b	d0,IMRA(a0)		//  IMRA bit6 å¾©æ´»
 
 	move.b	IMRB(a1),d0
-	andi.b	#%0100_0000,d0
-	andi.b	#%1011_1111,IMRB(a0)
-	or.b	d0,IMRB(a0)		//  IMRB bit6 •œŠˆ
+	andi.b	#0b01000000,d0
+	andi.b	#0b10111111,IMRB(a0)
+	or.b	d0,IMRB(a0)		//  IMRB bit6 å¾©æ´»
 
-	move.l	vector_118_bak(pc),0x118		//  V-disp ƒxƒNƒ^•œŠˆ
-	move.l	vector_138_bak(pc),0x138		//  CRT-IRQ ƒxƒNƒ^•œŠˆ
-	move.w	raster_No_bak(pc),0xE80012	//  CRT-IRQ ƒ‰ƒXƒ^ No. •œŠˆ
+	move.l	vector_118_bak(pc),0x118		//  V-disp ãƒ™ã‚¯ã‚¿å¾©æ´»
+	move.l	vector_138_bak(pc),0x138		//  CRT-IRQ ãƒ™ã‚¯ã‚¿å¾©æ´»
+	move.w	raster_No_bak(pc),0xE80012	//  CRT-IRQ ãƒ©ã‚¹ã‚¿ No. å¾©æ´»
 
 // ------------------------------
-	bsr	WAIT			//  68030 ‘Îô
-	andi.w	#0xf8ff,sr		//  Š„‚è‚İ on
+	bsr	WAIT			//  68030 å¯¾ç­–
+	andi.w	#0xf8ff,sr		//  å‰²ã‚Šè¾¼ã¿ on
 
 
-// =====[ ƒ†[ƒU[ƒ‚[ƒh‚Ö ]
+// =====[ ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã¸ ]
 	move.l	usp_bak(pc),d0
-	bmi.b	0f			//  ƒX[ƒp[ƒoƒCƒU[ƒ‚[ƒh‚©‚çÀs‚³‚ê‚Ä‚¢‚½‚ç–ß‚·•K—v–³‚µ
+	bmi.b	0f			//  ã‚¹ãƒ¼ãƒ‘ãƒ¼ãƒã‚¤ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã‹ã‚‰å®Ÿè¡Œã•ã‚Œã¦ã„ãŸã‚‰æˆ»ã™å¿…è¦ç„¡ã—
 		movea.l	d0,a1
-		iocs	_B_SUPER	//  ƒ†[ƒU[ƒ‚[ƒh‚Ö
+		iocs	_B_SUPER	//  ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã¸
 0:
 
-// -------[ I—¹ ]
+// -------[ çµ‚äº† ]
 xsp_off_rts:
-	movem.l	(sp)+,d0-d7/a0-a6	//  ƒŒƒWƒXƒ^•œŠˆ
+	movem.l	(sp)+,d0-d7/a0-a6	//  ãƒ¬ã‚¸ã‚¹ã‚¿å¾©æ´»
 	rts
 
 
@@ -452,8 +452,8 @@ xsp_off_rts:
 
 _xsp_vsyncint_on:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.l	A7ID+arg1_l(sp),vsyncint_sub
 	rts
@@ -469,8 +469,8 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 
 _xsp_vsyncint_off:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.l	#dummy_proc,vsyncint_sub
 	rts
@@ -486,8 +486,8 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 
 _xsp_hsyncint_on:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.l	A7ID+arg1_l(sp),usr_chart
 	rts
@@ -503,8 +503,8 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 
 _xsp_hsyncint_off:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.l	#dummy_chart,usr_chart
 	rts
@@ -520,8 +520,8 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 
 _xsp_auto_adjust_divy:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	A7ID+arg1_w(sp),auto_adjust_divy_flg
 	rts
@@ -537,13 +537,13 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 
 _xsp_divy_get:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	A7ID+arg1_w(sp),d0	//  d0 = i
-	bmi	0f			//  i < 0 ‚È‚ç bra
+	bmi	0f			//  i < 0 ãªã‚‰ bra
 	cmp #6,d0
-	bgt	0f			//  6 < i ‚È‚ç bra
+	bgt	0f			//  6 < i ãªã‚‰ bra
 	// -----[ 0 <= i <= 6 ]
 		add.w	d0,d0			//  d0 = i * 2
 		lea.l	divy_AB(pc),a0		//  a0.l = #divy_AB
@@ -551,7 +551,7 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 		rts
 0:
 
-	move.w	#-1, d0			//  –³Œø‚Èˆø”‚Ìê‡‚ÍƒGƒ‰[‚Æ‚µ‚Ä -1 ‚ğ•Ô‚·
+	move.w	#-1, d0			//  ç„¡åŠ¹ãªå¼•æ•°ã®å ´åˆã¯ã‚¨ãƒ©ãƒ¼ã¨ã—ã¦ -1 ã‚’è¿”ã™
 	rts
 
 
@@ -564,23 +564,23 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 // ========================================================================
 _xsp_min_divh_set:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	A7ID+arg1_w(sp),d0	//  d0.w = h
 
 	cmp #MIN_DIVH_MIN,d0
-	bge 0f				//  #MIN_DIVH_MIN <= h ‚È‚ç bra
+	bge 0f				//  #MIN_DIVH_MIN <= h ãªã‚‰ bra
 	// -----[ MIN_DIVH_MIN > h ]
 		moveq.l #MIN_DIVH_MIN,d0	//  h = MIN_DIVH_MIN
 0:
 	cmp #MIN_DIVH_MAX,d0
-	ble 0f				//  #MIN_DIVH_MAX >= h ‚È‚ç bra
+	ble 0f				//  #MIN_DIVH_MAX >= h ãªã‚‰ bra
 	// -----[ MIN_DIVH_MAX < h ]
 		moveq.l #MIN_DIVH_MAX,d0	//  h = MIN_DIVH_MAX
 0:
 
-	move.w	d0,min_divh		//  min_divh İ’è
+	move.w	d0,min_divh		//  min_divh è¨­å®š
 
 	rts
 
@@ -594,19 +594,19 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 // ========================================================================
 _xsp_raster_ofs_for31khz_set:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	A7ID+arg1_w(sp),raster_ofs_for31khz
 
 
-// -------[ ‘Sƒoƒbƒtƒ@‚ÌƒXƒvƒ‰ƒCƒg“]‘—ƒ‰ƒXƒ^‚ÌÄŒvZi31KHz —pj]
+// -------[ å…¨ãƒãƒƒãƒ•ã‚¡ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆè»¢é€ãƒ©ã‚¹ã‚¿ã®å†è¨ˆç®—ï¼ˆ31KHz ç”¨ï¼‰]
 	moveq.l	#2,d2
 	lea.l	XSP_STRUCT_no_pc,a0
 	0:
-		bsr	UPDATE_INT_RASTER_NUMBER_FOR_31KHZ	//  ”j‰ó d0-d1/a1
-	lea.l	STRUCT_SIZE(a0),a0			//  Ÿ‚Ì\‘¢‘Ì—v‘f‚Ö
-	dbra	d2,0b					//  w’è”ˆ—‚·‚é‚Ü‚Åƒ‹[ƒv
+		bsr	UPDATE_INT_RASTER_NUMBER_FOR_31KHZ	//  ç ´å£Š d0-d1/a1
+	lea.l	STRUCT_SIZE(a0),a0			//  æ¬¡ã®æ§‹é€ ä½“è¦ç´ ã¸
+	dbra	d2,0b					//  æŒ‡å®šæ•°å‡¦ç†ã™ã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
 
 	rts
 
@@ -620,8 +620,8 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 // ========================================================================
 _xsp_raster_ofs_for31khz_get:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	raster_ofs_for31khz(pc),d0
 
@@ -637,18 +637,18 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 // ========================================================================
 _xsp_raster_ofs_for15khz_set:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	A7ID+arg1_w(sp),raster_ofs_for15khz
 
-// -------[ ‘Sƒoƒbƒtƒ@‚ÌƒXƒvƒ‰ƒCƒg“]‘—ƒ‰ƒXƒ^‚ÌÄŒvZi15KHz —pj]
+// -------[ å…¨ãƒãƒƒãƒ•ã‚¡ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆè»¢é€ãƒ©ã‚¹ã‚¿ã®å†è¨ˆç®—ï¼ˆ15KHz ç”¨ï¼‰]
 	moveq.l	#2,d2
 	lea.l	XSP_STRUCT_no_pc,a0
 	0:
-		bsr	UPDATE_INT_RASTER_NUMBER_FOR_15KHZ	//  ”j‰ó d0-d1/a1
-	lea.l	STRUCT_SIZE(a0),a0			//  Ÿ‚Ì\‘¢‘Ì—v‘f‚Ö
-	dbra	d2,0b					//  w’è”ˆ—‚·‚é‚Ü‚Åƒ‹[ƒv
+		bsr	UPDATE_INT_RASTER_NUMBER_FOR_15KHZ	//  ç ´å£Š d0-d1/a1
+	lea.l	STRUCT_SIZE(a0),a0			//  æ¬¡ã®æ§‹é€ ä½“è¦ç´ ã¸
+	dbra	d2,0b					//  æŒ‡å®šæ•°å‡¦ç†ã™ã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—
 
 	rts
 
@@ -662,8 +662,8 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 // ========================================================================
 _xsp_raster_ofs_for15khz_get:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	raster_ofs_for15khz(pc),d0
 
@@ -679,12 +679,12 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 // ========================================================================
 _xsp_vsync_interval_set:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	A7ID+arg1_w(sp),d0		//  d0.w = interval
-	bne.b	0f				//  interval 0 ‚Å‚È‚¢‚È‚ç bra
-		moveq.l	#1,d0			//  interval 0 ‚Í 65536 ˆµ‚¢‚É‚È‚Á‚Ä‚µ‚Ü‚¤‚Ì‚Å 1 ‚É•â³
+	bne.b	0f				//  interval 0 ã§ãªã„ãªã‚‰ bra
+		moveq.l	#1,d0			//  interval 0 ã¯ 65536 æ‰±ã„ã«ãªã£ã¦ã—ã¾ã†ã®ã§ 1 ã«è£œæ­£
 0:
 	move.w	d0,vsync_interval_count_max	//  vsync_interval_count_max = d0
 	rts
@@ -699,8 +699,8 @@ A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
 // ========================================================================
 _xsp_vsync_interval_get:
 
-A7ID	=	4			//    ƒXƒ^ƒbƒNã returnæƒAƒhƒŒƒX  [ 4 byte ]
-					//  + ‘Ş”ğƒŒƒWƒXƒ^‚Ì‘SƒoƒCƒg”     [ 0 byte ]
+A7ID	=	4			//    ã‚¹ã‚¿ãƒƒã‚¯ä¸Š returnå…ˆã‚¢ãƒ‰ãƒ¬ã‚¹  [ 4 byte ]
+					//  + é€€é¿ãƒ¬ã‚¸ã‚¹ã‚¿ã®å…¨ãƒã‚¤ãƒˆæ•°     [ 0 byte ]
 
 	move.w	vsync_interval_count_max(pc),d0
 
