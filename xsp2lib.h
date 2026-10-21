@@ -7,8 +7,15 @@ Translation and formatting by Mike Moffitt 2022
 
 #pragma once
 
+// `info` attribute defines.
 #define XSP_HF 0x4000
 #define XSP_VF 0x8000
+#define XSP_PAL(color) ((color)<<8)
+
+#define XSP_PRIO_HIDDEN 0x00
+#define XSP_PRIO_BOTTOM 0x10
+#define XSP_PRIO_MIDDLE 0x20
+#define XSP_PRIO_TOP    0x30
 
 #define XSP_INFO(flip, color, prio) ((flip) | ((color & 0xF) << 8) | (prio))
 
