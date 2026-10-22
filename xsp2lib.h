@@ -1,11 +1,22 @@
 /*
 Sprite Management System "XSP"
-Ver 2.02 by Yosshin
+Ver 2.04 by Yosshin
 https://github.com/yosshin4004/x68k_xsp
 Translation and formatting by Mike Moffitt 2022
 */
 
 #pragma once
+
+// gcc 10 以降では、C の関数呼出し規約を無視して inline __asm__ で関数を実行
+#if defined(__GNUC__)
+#	if (__GNUC__ >= 10)
+#		define XSP_USE_INLINE_ASM (1)
+#		define XSP_FORCE_INLINE	static __attribute__((__always_inline__)) inline
+#	endif
+#endif
+#ifndef XSP_FORCE_INLINE
+#define XSP_FORCE_INLINE
+#endif  // XSP_FORCE_INLINE
 
 // `info` attribute defines.
 #define XSP_HF 0x4000
@@ -154,23 +165,23 @@ short xsp_vsync(short n);
 //           pt: PCG pattern number (0-0x7FFF)
 //         info: Attribute info (see readme)
 // Returns 0 if the sprite's coordinates were off-screen.
-short xsp_set(short x, short y, short pt, short info);
+XSP_FORCE_INLINE short xsp_set(short x, short y, short pt, short info);
 
 // Register a composite sprite for display.
 //            x: Composite Sprite X coordinate
 //            y: Composite Sprite Y coordinate
 //           pt: Composite sprite mapping (REF) number (0-0x0FFF)
 //         info: Attribute info (see readme)
-void xobj_set(short x, short y, short pt, short info);
+XSP_FORCE_INLINE void xobj_set(short x, short y, short pt, short info);
 
 // Register a single-pattern sprite for display.
 //          arg: Object set argument pointer
 // Returns 0 if the sprite's coordinates were off-screen.
-short xsp_set_st(const XSP_SET_ARG *arg);
+XSP_FORCE_INLINE short xsp_set_st(const XSP_SET_ARG *arg);
 
 // Register a composite sprite for display.
 //          arg: Object set argument pointer
-void xobj_set_st(const XSP_SET_ARG *arg);
+XSP_FORCE_INLINE void xobj_set_st(const XSP_SET_ARG *arg);
 
 // Displays sprites registered with batch processing.
 // Returns the number of registered sprites displayed.
@@ -221,6 +232,77 @@ void xsp_raster_ofs_for15khz_set(short ofs);
 
 // Returns the sprite transfer raster line for 15KHz.
 short xsp_raster_ofs_for15khz_get(void);
+
+// Inline implementations
+
+#ifdef XSP_USE_INLINE_ASM
+
+XSP_FORCE_INLINE short xsp_set(short x, short y, short pt, short info)
+{
+	register short reg_d0 __asm__ ("d0") = x;
+	register short reg_d1 __asm__ ("d1") = y;
+	register short reg_d2 __asm__ ("d2") = pt;
+	register short reg_d3 __asm__ ("d3") = info;
+	__asm__ __volatile__ (
+			"	jbsr	xsp_set_asm\n"
+	:	/* 出力 */	"+r"	(reg_d0)	/* in out %0 (入力＆戻り値) */
+	:	/* 入力 */	"r"		(reg_d1),	/* in     %1 (入力＆維持) */
+					"r"		(reg_d2),	/* in     %2 (入力＆維持) */
+					"r"		(reg_d3)	/* in     %3 (入力＆維持) */
+	:	/* 破壊 */	"a0"
+	);
+	return reg_d0;
+}
+
+XSP_FORCE_INLINE short xsp_set_st(const XSP_SET_ARG *arg)
+{
+	register short       reg_d0 __asm__ ("d0");
+	register const void *reg_a0 __asm__ ("a0") = arg;
+	__asm__ __volatile__ (
+			"	jbsr	xsp_set_st_asm\n"
+	:	/* 出力 */	"=r"	(reg_d0),	/*    out %0 (戻り値) */
+					"+r"	(reg_a0)	/* in out %1 (入力＆破壊) */
+	:	/* 入力 */
+	:	/* 破壊 */	"memory",			/* メモリバリアを要求 */
+					"a1"
+	);
+	return reg_d0;
+}
+
+XSP_FORCE_INLINE void xobj_set(short x, short y, short pt, short info)
+{
+	register short reg_d0 __asm__ ("d0") = x;
+	register short reg_d1 __asm__ ("d1") = y;
+	register short reg_d2 __asm__ ("d2") = pt;
+	register short reg_d3 __asm__ ("d3") = info;
+	__asm__ __volatile__ (
+			"	jbsr	xobj_set_asm\n"
+	:	/* 出力 */	"+r"	(reg_d0),	/* in out %0 (入力＆破壊) */
+					"+r"	(reg_d1),	/* in out %1 (入力＆破壊) */
+					"+r"	(reg_d2),	/* in out %2 (入力＆破壊) */
+					"+r"	(reg_d3)	/* in out %3 (入力＆破壊) */
+	:	/* 入力 */
+	:	/* 破壊 */	"d4",
+					"a0","a1","a2"
+	);
+}
+
+XSP_FORCE_INLINE void xobj_set_st(const XSP_SET_ARG *arg)
+{
+	register short       reg_d0 __asm__ ("d0");
+	register const void *reg_a0 __asm__ ("a0") = arg;
+	__asm__ __volatile__ (
+			"	jbsr	xobj_set_st_asm\n"
+	:	/* 出力 */	"=r"	(reg_d0),	/* out %0 (破壊) */
+					"+r"	(reg_a0)	/* out %1 (入力＆破壊) */
+	:	/* 入力 */
+	:	/* 破壊 */	"memory",			/* メモリバリアを要求 */
+					"d1","d2","d3","d4",
+					"a1","a2"
+	);
+}
+
+#endif  // XSP_USE_INLINE_ASM
 
 #else
 

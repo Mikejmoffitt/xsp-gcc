@@ -18,7 +18,7 @@
 //
 // ========================================================================
 
-_xsp_set_asm:
+xsp_set_asm:
 					//  d0.w = SP_x
 					//  d1.w = SP_y
 					//  d2.w = SP_pt
@@ -93,7 +93,7 @@ XSP_SET_ASM_CANCEL:
 //
 // ========================================================================
 
-_xsp_set_st_asm:
+xsp_set_st_asm:
 						//  a0.l = 構造体アドレス
 
 	move.l	(a0)+,d0			// [12]	d0.l = SP_x,SP_y
@@ -262,7 +262,7 @@ OBJ_SET_ASM_RETURN:
 	rts
 
 
-_xobj_set_st_asm:
+xobj_set_st_asm:
 					// 	a0.l = 構造体アドレス
 	movem.w	(a0),d0-d3		// [8+4n]	d0.w = SP_x
 					// 	d1.w = SP_y
@@ -270,7 +270,7 @@ _xobj_set_st_asm:
 					// 	d3.w = SP_info
 					// 	a0.l は用済み
 
-_xobj_set_asm:
+xobj_set_asm:
 					//  d0.w = SP_x
 					//  d1.w = SP_y
 					//  d2.w = 複合スプライト pt
