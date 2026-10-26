@@ -2,7 +2,7 @@
 
 This is a hasty conversion of [XSP](https://github.com/yosshin4004/x68k_xsp) V2.04 to GCC/GAS syntax.
 
-適当にGCC/GASの文法に編集しました。　下手くその日本語で許してほしいです。
+適当にGCC/GASの文法に編集しました。　下手くその日本語を許してほしいです。
 
 As always, this is work done with some regex and otherwise done by hand. Absolutely no AI was used.
 
@@ -53,7 +53,8 @@ This is an example. I expect the invocation will change based on your environmen
 ## Clobber Convention・潰されているレジスターの注意
 
 It seems on X68000 registers `d0-d2/a0-a2` were clobbered, so when writing C code along side XSP, you should set the following options in the compiler to avoid having a bad time:
-当時関数は`d0-d2/a0-a2`を潰していたそうので、もしC元号から呼ぶならコンパイラーにこのフラグを立てください。
+
+当時関数は`d0-d2/a0-a2`を潰していたそうので、もしC言語から呼ぶならコンパイラーにこのフラグを立てください。
 
 ```
 CFLAGS += -fcall-used-d2 -fcall-used-a2
