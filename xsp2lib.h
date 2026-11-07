@@ -38,7 +38,7 @@ typedef struct
 	short x;              // X 座標 Position
 	short y;              // Y 座標 Position
 	short pt;             // スプライトパターン Sprite pattern no.
-	short info;           // 反転コード・色・優先度を表わすデータ
+	unsigned short info;  // 反転コード・色・優先度を表わすデータ
 	                      // Reflection code, color, priority data
 	/*
       info = 0x****
@@ -53,7 +53,7 @@ typedef struct
                                             0x8：Vertical flip
                                             0xC：Both
 	*/
-} XSP_SET_ARG;
+} __attribute__((packed)) XSP_SET_ARG;
 #else
 	.struct	0
 XSP_SET_ARG.x:			ds.w	1
@@ -72,7 +72,7 @@ typedef struct
 	short vy;  // 相対座標データ Relative Y coordinate data
 	short pt;  // スプライトパターン Sprite pattern no.
 	short rv;  // 反転コード Reflection code
-} XOBJ_FRM_DAT;
+} __attribute__((packed)) XOBJ_FRM_DAT;
 #else
 	.struct	0
 XOBJ_FRM_DAT.vx:		ds.w	1
@@ -87,10 +87,10 @@ XOBJ_FRM_DAT.len:
 #ifndef __ASSEMBLER__
 typedef struct
 {
-	short num;    // 合成スプライト数 Composite sprite FRM data count
-	void *ptr;    // 開始位置のポインタ Pointer to start of FRM data
-	short unused; //（未使用）(Unused)
-} XOBJ_REF_DAT;
+	short num;                // 合成スプライト数 Composite sprite FRM data count
+	const XOBJ_FRM_DAT *ptr;  // 開始位置のポインタ Pointer to start of FRM data
+	short unused;             //（未使用）(Unused)
+} __attribute__((packed)) XOBJ_REF_DAT;
 #else
 	.struct	0
 XOBJ_REF_DAT.num:		ds.w	1
@@ -108,7 +108,7 @@ typedef struct
 	                     // Use -1 to mark the end of the time chart.
 	void (*proc)(void);  // 割り込み処理関数のポインタ
 	                     // Raster interrupt routine pointer
-} XSP_TIME_CHART;
+} __attribute__((packed)) XSP_TIME_CHART;
 #else
 	.struct	0
 XSP_TIME_CHART.ras_no:	ds.w	1
@@ -165,14 +165,14 @@ short xsp_vsync(short n);
 //           pt: PCG pattern number (0-0x7FFF)
 //         info: Attribute info (see readme)
 // Returns 0 if the sprite's coordinates were off-screen.
-XSP_FORCE_INLINE short xsp_set(short x, short y, short pt, short info);
+XSP_FORCE_INLINE short xsp_set(short x, short y, short pt, unsigned short info);
 
 // Register a composite sprite for display.
 //            x: Composite Sprite X coordinate
 //            y: Composite Sprite Y coordinate
 //           pt: Composite sprite mapping (REF) number (0-0x0FFF)
 //         info: Attribute info (see readme)
-XSP_FORCE_INLINE void xobj_set(short x, short y, short pt, short info);
+XSP_FORCE_INLINE void xobj_set(short x, short y, short pt, unsigned short info);
 
 // Register a single-pattern sprite for display.
 //          arg: Object set argument pointer
@@ -237,12 +237,12 @@ short xsp_raster_ofs_for15khz_get(void);
 
 #ifdef XSP_USE_INLINE_ASM
 
-XSP_FORCE_INLINE short xsp_set(short x, short y, short pt, short info)
+XSP_FORCE_INLINE short xsp_set(short x, short y, short pt, unsigned short info)
 {
-	register short reg_d0 __asm__ ("d0") = x;
-	register short reg_d1 __asm__ ("d1") = y;
-	register short reg_d2 __asm__ ("d2") = pt;
-	register short reg_d3 __asm__ ("d3") = info;
+	register int reg_d0 __asm__ ("d0") = x;
+	register int reg_d1 __asm__ ("d1") = y;
+	register int reg_d2 __asm__ ("d2") = pt;
+	register unsigned int reg_d3 __asm__ ("d3") = info;
 	__asm__ __volatile__ (
 			"	jbsr	xsp_set_asm\n"
 	:	/* 出力 */	"+r"	(reg_d0)	/* in out %0 (入力＆戻り値) */
@@ -251,12 +251,12 @@ XSP_FORCE_INLINE short xsp_set(short x, short y, short pt, short info)
 					"r"		(reg_d3)	/* in     %3 (入力＆維持) */
 	:	/* 破壊 */	"a0"
 	);
-	return reg_d0;
+	return (short)reg_d0;
 }
 
 XSP_FORCE_INLINE short xsp_set_st(const XSP_SET_ARG *arg)
 {
-	register short       reg_d0 __asm__ ("d0");
+	register int       reg_d0 __asm__ ("d0");
 	register const void *reg_a0 __asm__ ("a0") = arg;
 	__asm__ __volatile__ (
 			"	jbsr	xsp_set_st_asm\n"
@@ -266,15 +266,15 @@ XSP_FORCE_INLINE short xsp_set_st(const XSP_SET_ARG *arg)
 	:	/* 破壊 */	"memory",			/* メモリバリアを要求 */
 					"a1"
 	);
-	return reg_d0;
+	return (short)reg_d0;
 }
 
-XSP_FORCE_INLINE void xobj_set(short x, short y, short pt, short info)
+XSP_FORCE_INLINE void xobj_set(short x, short y, short pt, unsigned short info)
 {
-	register short reg_d0 __asm__ ("d0") = x;
-	register short reg_d1 __asm__ ("d1") = y;
-	register short reg_d2 __asm__ ("d2") = pt;
-	register short reg_d3 __asm__ ("d3") = info;
+	register int reg_d0 __asm__ ("d0") = x;
+	register int reg_d1 __asm__ ("d1") = y;
+	register int reg_d2 __asm__ ("d2") = pt;
+	register unsigned int reg_d3 __asm__ ("d3") = info;
 	__asm__ __volatile__ (
 			"	jbsr	xobj_set_asm\n"
 	:	/* 出力 */	"+r"	(reg_d0),	/* in out %0 (入力＆破壊) */
@@ -289,7 +289,7 @@ XSP_FORCE_INLINE void xobj_set(short x, short y, short pt, short info)
 
 XSP_FORCE_INLINE void xobj_set_st(const XSP_SET_ARG *arg)
 {
-	register short       reg_d0 __asm__ ("d0");
+	register int       reg_d0 __asm__ ("d0");
 	register const void *reg_a0 __asm__ ("a0") = arg;
 	__asm__ __volatile__ (
 			"	jbsr	xobj_set_st_asm\n"
