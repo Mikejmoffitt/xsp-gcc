@@ -151,13 +151,27 @@ void xsp_mode(short mode_no);
 //      sp_ref: Pointer to XOBJ reference data.
 void xsp_objdat_set(const XOBJ_REF_DAT *sp_ref);
 
-// Wait for vertical sync.
+// (Deprecated) Wait for vertical sync.
 //            n: Number of vertical blank intervals to wait.
 //               If 0 is specified, a frame of advance processing is done.
 //               Advance processing may smooth a choppy game but will incur a
 //               frame of latency.
 // Returns the number of missed vertical blank periods.
 short xsp_vsync(short n);
+
+// Wait for vertical sync, and if there are too many draw requests, wait.
+//    max_delay: Number of delayed frames to allow.
+// Returns 1 if blocking occured.
+short xsp_vsync2(short max_delay);
+
+// Specifies the vertical sync interval.
+//     interval: The interval value. Must be >= 1. 0 is treated as 1.
+void xsp_vsync_interval_set(short interval);
+
+// Returns the vertical sync interval.
+short xsp_vsync_interval_get(void);
+
+
 
 // Register a single-pattern sprite for display.
 //            x: Sprite X coordinate

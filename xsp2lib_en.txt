@@ -142,10 +142,12 @@ Note 2) If needed, call the xsp_pcgmask_on/off functions to allocate and
 Note 3) You may optionally call xsp_mode to set the algorithm used to
         multiplex sprites. (This may be done after xsp_on has been called).
 
-Note 4) You may optionally call xsp_vsyncint_on/off to set or clear the
+Note 4) If necessary, use xsp_vsync_interval_set to adjust the interval.
+
+Note 5) You may optionally call xsp_vsyncint_on/off to set or clear the
         vertical blank interrupt process. (This may be done after xsp_on).
 
-Note 5) Raster line interrupts may be set or cleared using the
+Note 6) Raster line interrupts may be set or cleared using the
         xsp_hsyncint_on/off functions. (May be done after calling xsp_on).
 
 
